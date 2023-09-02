@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "672278888512",
+    "project_id": "femcycle-c9ef5",
+    "storage_bucket": "femcycle-c9ef5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:672278888512:android:fd7a40bff869952d0c5fa5",
+        "android_client_info": {
+          "package_name": "com.example.frontend"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "672278888512-ajgparpren93s4lggn6gnid4kj6demmc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC-9XiPjglaiA_Alne81Qo2nXurPfu3VM0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "672278888512-ajgparpren93s4lggn6gnid4kj6demmc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
