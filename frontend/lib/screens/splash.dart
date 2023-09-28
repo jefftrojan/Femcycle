@@ -10,9 +10,11 @@ class SplashScreenWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AnimatedSplashScreen(
-      duration: 6000, // Adjust the duration as needed
+      duration: 6000, 
+      
       
       splash: Container(
+        
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -20,12 +22,12 @@ class SplashScreenWidget extends StatelessWidget {
             Container(
               child: const Center(
                 child: Text(
-                  'FemCycle',
+                  'Fem.Cycle',
                   style: TextStyle(
-                    color: primary,
+                    color: Colors.white,
                     fontSize: 28,
                     fontFamily: 'Poppins',
-                    fontWeight: FontWeight.w800,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
               ),
@@ -35,7 +37,16 @@ class SplashScreenWidget extends StatelessWidget {
       ),
       nextScreen:const SignIn() , // Navigate to your main screen
       splashTransition: SplashTransition.fadeTransition,
-      backgroundColor: Colors.white, // Background color for the next screen
+      backgroundColor: primaryDark, // Background color for the next screen
     );
+  }
+}
+
+
+class Onboarding extends StatelessWidget {
+  // implemenet onboarding screen with PageViewMOdel here
+  @override
+  Widget build(BuildContext context) {
+    return const Placeholder();
   }
 }

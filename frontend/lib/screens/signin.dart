@@ -2,8 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/screens/authentication.dart';
-import 'package:frontend/screens/chatpy.dart';
 import 'package:frontend/screens/signup.dart';
+import 'package:frontend/utils/utils.dart';
 
 import '../utils/colors.dart';
 
@@ -33,7 +33,7 @@ class _SignInState extends State<SignIn> {
        Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) =>ChatScreen(), // Use Firebase user
+            builder: (context) =>BottomNavScreen(),
           ),
         );
 
