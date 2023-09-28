@@ -4,6 +4,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import '../utils/colors.dart';
 
 class RecoverAccountScreen extends StatefulWidget {
+  const RecoverAccountScreen({super.key});
+
   @override
   _RecoverAccountScreenState createState() => _RecoverAccountScreenState();
 }
@@ -36,7 +38,7 @@ class _RecoverAccountScreenState extends State<RecoverAccountScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            Text(
+            const Text(
               'Recover Your Account ',
               textAlign: TextAlign.center,
               style: TextStyle(
@@ -46,15 +48,15 @@ class _RecoverAccountScreenState extends State<RecoverAccountScreen> {
                 fontWeight: FontWeight.w700,
               ),
             ),
-            SizedBox(height: 50,),
+            const SizedBox(height: 50,),
             TextField(
               controller: _emailController,
-              decoration: InputDecoration(labelText: 'Email'),
+              decoration: const InputDecoration(labelText: 'Email'),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             ElevatedButton(
               onPressed: _recoverAccount,
-              child: Text("SUBMIT"),
+              child: const Text("SUBMIT"),
             ),
             Text(_message),
           ],

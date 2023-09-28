@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
+import 'package:frontend/screens/chatpy.dart';
+import 'package:frontend/screens/location.dart';
+import 'package:frontend/screens/profile.dart';
 import 'package:frontend/utils/colors.dart';
-import 'package:table_calendar/table_calendar.dart';
-
+import 'package:frontend/utils/utils.dart';
 
 class Periods extends StatefulWidget {
+  
   const Periods({super.key});
 
   @override
@@ -12,21 +14,19 @@ class Periods extends StatefulWidget {
 }
 
 class _PeriodsState extends State<Periods> {
-
-
-
+ 
+ 
+  
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-       appBar: AppBar(
-        backgroundColor: primary,
-        title: Text("Fem Cycle"),
-
-      ),
-      body: SingleChildScrollView(
-
-      ),
+      
+      body: SingleChildScrollView(),
+     
+   
+     
+     
     );
   }
 }

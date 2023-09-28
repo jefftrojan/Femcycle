@@ -2,12 +2,15 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:frontend/screens/location.dart';
 import 'package:frontend/screens/signin.dart';
 
 import '../utils/colors.dart';
 
 
 class AuthScreen extends StatefulWidget {
+  const AuthScreen({super.key});
+
   @override
   _AuthScreenState createState() => _AuthScreenState();
 }
@@ -19,8 +22,9 @@ class _AuthScreenState extends State<AuthScreen> {
   final TextEditingController _confirmPasswordController = TextEditingController();
 
   String _message = '';
+  
 
- void _signUp() async {
+  void _signUp() async {
   try {
     if (_passwordController.text == _confirmPasswordController.text) {
       await _auth.createUserWithEmailAndPassword(
@@ -36,6 +40,14 @@ class _AuthScreenState extends State<AuthScreen> {
       setState(() {
         _message = 'Sign-up successful!';
       });
+
+      // Navigate to the ChatScreen after successful sign-up
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const Stores(), // Replace with the actual ChatScreen class
+        ),
+      );
     } else {
       setState(() {
         _message = 'Passwords do not match.';
@@ -47,7 +59,6 @@ class _AuthScreenState extends State<AuthScreen> {
     });
   }
 }
-
 
   void _signIn() async {
     try {
@@ -76,7 +87,7 @@ class _AuthScreenState extends State<AuthScreen> {
           crossAxisAlignment: CrossAxisAlignment.center,
           
           children: <Widget>[
-            Text(
+            const Text(
             'Register on\n Fem Cycle ',
             textAlign: TextAlign.center,
             style: TextStyle(
@@ -86,31 +97,31 @@ class _AuthScreenState extends State<AuthScreen> {
             fontWeight: FontWeight.w700,
             ),),
             
-            SizedBox(height: 50,),
+            const SizedBox(height: 50,),
             TextField(
               controller: _emailController,
-              decoration: InputDecoration(labelText: 'Email'),
+              decoration: const InputDecoration(labelText: 'Email'),
             ),
             TextField(
               controller: _passwordController,
-              decoration: InputDecoration(labelText: 'Password'),
+              decoration: const InputDecoration(labelText: 'Password'),
               obscureText: true,
             ),
             TextField(
               controller: _confirmPasswordController,
-              decoration: InputDecoration(labelText: 'Confirm Password'),
+              decoration: const InputDecoration(labelText: 'Confirm Password'),
               obscureText: true,
             ),
-            SizedBox(height: 30),
-            Container(
+            const SizedBox(height: 30),
+            SizedBox(
              
               width: double.infinity,
               child: ElevatedButton(
                  style: ElevatedButton.styleFrom(
-                  primary:primary,
+                  backgroundColor: primary,
                 ),
                 onPressed: _signUp,
-                child: Text("Sign Up",),
+                child: const Text("Sign Up",),
               ),
             ),
             // Container(
@@ -124,11 +135,11 @@ class _AuthScreenState extends State<AuthScreen> {
             //     child: Text("Sign In"),
             //   ),
             // ),
-            SizedBox(height: 30),
+            const SizedBox(height: 30),
             Text.rich(
               TextSpan(
               children: [
-              TextSpan(
+              const TextSpan(
               text: 'have an acount? ',
               style: TextStyle(
               color: Colors.black,
@@ -137,7 +148,7 @@ class _AuthScreenState extends State<AuthScreen> {
               fontWeight: FontWeight.w400,
               ),
               ),
-              TextSpan(
+              const TextSpan(
               text: ' ',
               style: TextStyle(
               color: Color(0xFFD87234),
@@ -150,7 +161,7 @@ class _AuthScreenState extends State<AuthScreen> {
               TextSpan(
               
               text: 'Sign In',
-              style: TextStyle(
+              style: const TextStyle(
               color: Colors.black,
               fontSize: 14,
               fontFamily: 'Nunito',
@@ -160,7 +171,7 @@ class _AuthScreenState extends State<AuthScreen> {
           ..onTap = () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => SignIn()),
+              MaterialPageRoute(builder: (context) => const SignIn()),
               );}
               ),
           
@@ -168,22 +179,22 @@ class _AuthScreenState extends State<AuthScreen> {
               ),
               textAlign: TextAlign.right,
               ),
-              SizedBox(height:30),
+              const SizedBox(height:30),
             Row(
               children: [
                 Expanded(
                   child: Container(
                     height: 1.0,
                     color: Colors.black,
-                    margin: EdgeInsets.only(right: 8.0),
+                    margin: const EdgeInsets.only(right: 8.0),
                   ),
                 ),
-                Text("Sign in With"),
+                const Text("Sign in With"),
                 Expanded(
                   child: Container(
                     height: 1.0,
                     color: Colors.black,
-                    margin: EdgeInsets.only(left: 8.0),
+                    margin: const EdgeInsets.only(left: 8.0),
                   ),
                 ),
               ],

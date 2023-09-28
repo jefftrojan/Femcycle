@@ -2,11 +2,14 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/screens/authentication.dart';
+import 'package:frontend/screens/chatpy.dart';
 import 'package:frontend/screens/signup.dart';
 
 import '../utils/colors.dart';
 
 class SignIn extends StatefulWidget {
+  const SignIn({super.key});
+
   @override
   _SignInState createState() => _SignInState();
 }
@@ -27,6 +30,13 @@ class _SignInState extends State<SignIn> {
       setState(() {
         _message = 'Sign-in successful!';
       });
+       Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) =>ChatScreen(), // Use Firebase user
+          ),
+        );
+
     } catch (e) {
       setState(() {
         _message = 'Error: ${e.toString()}';
@@ -44,7 +54,7 @@ class _SignInState extends State<SignIn> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            Text(
+            const Text(
               'Sign In ',
               textAlign: TextAlign.center,
               style: TextStyle(
@@ -55,26 +65,26 @@ class _SignInState extends State<SignIn> {
               ),
             ),
 
-            SizedBox(
+            const SizedBox(
               height: 50,
             ),
             TextField(
               controller: _emailController,
-              decoration: InputDecoration(labelText: 'Email'),
+              decoration: const InputDecoration(labelText: 'Email'),
             ),
             TextField(
               controller: _passwordController,
-              decoration: InputDecoration(labelText: 'Password'),
+              decoration: const InputDecoration(labelText: 'Password'),
               obscureText: true,
             ),
-            SizedBox(height: 16,),
+            const SizedBox(height: 16,),
             Text.rich(
               TextSpan(
                 children: [
                   
                     TextSpan(
                       text: 'Forgot Password?',
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Colors.black,
                         fontSize: 14,
                         fontFamily: 'Nunito',
@@ -85,28 +95,28 @@ class _SignInState extends State<SignIn> {
                         ..onTap = () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => RecoverAccountScreen()),
+                            MaterialPageRoute(builder: (context) => const RecoverAccountScreen()),
                           );
                         }),
                 ],
               ),
               textAlign: TextAlign.start,
             ),
-            SizedBox(height: 16),
-            Container(
+            const SizedBox(height: 16),
+            SizedBox(
               width:double.infinity,
               child: ElevatedButton(
-                style: ElevatedButton.styleFrom(primary: primary),
+                style: ElevatedButton.styleFrom(backgroundColor: primary),
                 
                 onPressed: _signIn,
-                child: Text("Sign In"),
+                child: const Text("Sign In"),
               ),
             ),
-            SizedBox(height: 30),
+            const SizedBox(height: 30),
             Text.rich(
               TextSpan(
                 children: [
-                  TextSpan(
+                  const TextSpan(
                     text: 'Don\'t have an acount? ',
                     style: TextStyle(
                       color: Colors.black,
@@ -115,7 +125,7 @@ class _SignInState extends State<SignIn> {
                       fontWeight: FontWeight.w400,
                     ),
                   ),
-                  TextSpan(
+                  const TextSpan(
                     text: ' ',
                     style: TextStyle(
                       color: Color(0xFFD87234),
@@ -127,7 +137,7 @@ class _SignInState extends State<SignIn> {
                   ),
                   TextSpan(
                       text: 'Sign Up',
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Colors.black,
                         fontSize: 14,
                         fontFamily: 'Nunito',
@@ -138,29 +148,29 @@ class _SignInState extends State<SignIn> {
                         ..onTap = () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => AuthScreen()),
+                            MaterialPageRoute(builder: (context) => const AuthScreen()),
                           );
                         }),
                 ],
               ),
               textAlign: TextAlign.right,
             ),
-            SizedBox(height: 30),
+            const SizedBox(height: 30),
             Row(
               children: [
                 Expanded(
                   child: Container(
                     height: 1.0,
                     color: Colors.black,
-                    margin: EdgeInsets.only(right: 8.0),
+                    margin: const EdgeInsets.only(right: 8.0),
                   ),
                 ),
-                Text("Sign in With"),
+                const Text("Sign in With"),
                 Expanded(
                   child: Container(
                     height: 1.0,
                     color: Colors.black,
-                    margin: EdgeInsets.only(left: 8.0),
+                    margin: const EdgeInsets.only(left: 8.0),
                   ),
                 ),
               ],
@@ -172,3 +182,4 @@ class _SignInState extends State<SignIn> {
     );
   }
 }
+
