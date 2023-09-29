@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 import pandas as pd
 import statsmodels.api as sm
-import datetime
+from datetime import date
 
 app = FastAPI()
 from fastapi.middleware.cors import CORSMiddleware
@@ -29,7 +29,7 @@ class ARIMAModel:
 
 # Input model
 class InputModel(BaseModel):
-    previous_dates: list[datetime.date]
+    previous_dates: list[date]
 
 @app.post("/predict")
 def predict_menstrual_cycle_dates(input_data: InputModel):
