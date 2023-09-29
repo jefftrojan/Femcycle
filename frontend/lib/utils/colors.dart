@@ -8,4 +8,5 @@ const common = Color.fromRGBO(55, 62, 78, 100);
 
 const Color accentchatalt = Color.fromARGB(255, 35, 31, 36);
 const Color black = Color(0xFF000000);
-const Color primaryDark = Color.fromARGB(255, 44, 26, 51);
+const Color primaryDark = Color.fromRGBO(215, 181, 242, 1);
+const Color textsec = Color.fromRGBO(9, 10, 10, 1);

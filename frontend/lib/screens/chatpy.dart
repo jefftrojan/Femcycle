@@ -100,9 +100,7 @@ class _ChatScreenState extends State<ChatScreen> {
     return Scaffold(
       body: Column(
         children: [
-          const SizedBox(
-            height: 8,
-          ),
+         
           
           // Visibility(child: BubbleNormal(
           // text: "Hello there,\nWelcome back. I am your ai assistant. You can ask me anything about menstrual hygiene and reproductive health,",

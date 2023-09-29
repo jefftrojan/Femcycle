@@ -91,7 +91,7 @@ class _AuthScreenState extends State<AuthScreen> {
             'Register on\n Fem Cycle ',
             textAlign: TextAlign.center,
             style: TextStyle(
-            color: primary,
+            color: primaryDark,
             fontSize: 35.48,
             fontFamily: 'Nunito',
             fontWeight: FontWeight.w700,
@@ -118,7 +118,7 @@ class _AuthScreenState extends State<AuthScreen> {
               width: double.infinity,
               child: ElevatedButton(
                  style: ElevatedButton.styleFrom(
-                  backgroundColor: primary,
+                  backgroundColor: primaryDark,
                 ),
                 onPressed: _signUp,
                 child: const Text("Sign Up",),

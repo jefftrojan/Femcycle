@@ -58,7 +58,7 @@ class _SignInState extends State<SignIn> {
               'Sign In ',
               textAlign: TextAlign.center,
               style: TextStyle(
-                color: primary,
+                color: primaryDark,
                 fontSize: 35.48,
                 fontFamily: 'Nunito',
                 fontWeight: FontWeight.w700,
@@ -106,7 +106,7 @@ class _SignInState extends State<SignIn> {
             SizedBox(
               width:double.infinity,
               child: ElevatedButton(
-                style: ElevatedButton.styleFrom(backgroundColor: primary),
+                style: ElevatedButton.styleFrom(backgroundColor: primaryDark),
                 
                 onPressed: _signIn,
                 child: const Text("Sign In"),
