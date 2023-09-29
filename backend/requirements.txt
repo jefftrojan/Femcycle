@@ -9,3 +9,5 @@ six
 statsmodels
 tzdata
 uvicorn
+fastapi
+pydantic
