@@ -1,5 +1,6 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:frontend/screens/onboarding.dart';
 import 'package:frontend/screens/signin.dart';
 
 import '../utils/colors.dart';
@@ -35,18 +36,11 @@ class SplashScreenWidget extends StatelessWidget {
           ],
         ),
       ),
-      nextScreen:const SignIn() , // Navigate to your main screen
+      nextScreen:const OnboardingScreen() , 
       splashTransition: SplashTransition.fadeTransition,
-      backgroundColor: primaryDark, // Background color for the next screen
+      backgroundColor: primaryDark, 
     );
   }
 }
 
 
-class Onboarding extends StatelessWidget {
-  // implemenet onboarding screen with PageViewMOdel here
-  @override
-  Widget build(BuildContext context) {
-    return const Placeholder();
-  }
-}
