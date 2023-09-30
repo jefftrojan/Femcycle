@@ -105,7 +105,13 @@ class OnboardingStep extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Image.asset(content.image),
+          
+          Container(
+            width: imagesize,
+            height: imagesize,
+            child: Image.asset(content.image,
+            fit: BoxFit.cover,),
+          ),
           SizedBox(
             height: 20,
           ),
@@ -122,7 +128,7 @@ class OnboardingStep extends StatelessWidget {
           ),
           Text(
             content.description,
-            style: TextStyle(fontSize: 18),
+            style: TextStyle(fontSize: 16, color: Colors.blueGrey),
             textAlign: TextAlign.center,
           )
         ],

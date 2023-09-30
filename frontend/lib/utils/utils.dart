@@ -27,6 +27,8 @@ class OnboardingContent {
   });
 }
 
+const double imagesize = 250.0;
+
 List<OnboardingContent> onboardingData = [
   OnboardingContent(
     image: "lib/assets/femalecard.jpg",
