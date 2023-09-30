@@ -44,7 +44,7 @@ class _SignInState extends State<SignIn> {
             _message = 'Sign-in successful!';
           });
 
-          // Navigate to the next screen or perform any required actions
+          
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(
@@ -215,7 +215,7 @@ class _SignInState extends State<SignIn> {
               onPressed: _signInWithGoogle, // Trigger Google Sign-In
               style: ElevatedButton.styleFrom(
                 elevation: 0,
-                primary: Colors.white, // Set the background color to white
+                primary: Colors.white, 
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
