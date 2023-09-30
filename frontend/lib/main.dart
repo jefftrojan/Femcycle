@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
     return  MaterialApp(
       debugShowCheckedModeBanner: false,
       title: '',
-      home: Account(),
+      home:SplashScreenWidget(),
        
     );
   }

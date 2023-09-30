@@ -81,7 +81,7 @@ class _AccountState extends State<Account> {
               onPressed: () {
                 //update logic 
               },
-              child: Text('Update Profile'),
+              child: Text('Update Profile', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
             ),
           ],
         ),

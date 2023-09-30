@@ -98,6 +98,21 @@ class _ChatScreenState extends State<ChatScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        
+      elevation: 0, 
+       backgroundColor: Colors.white,
+       leading: Padding(
+         padding: const EdgeInsets.all(8.0),
+         child: CircleAvatar(
+          
+          backgroundImage: AssetImage("lib/assets/girlsclock.jpg"),
+          radius: 50, 
+          
+          
+             ),
+       ),
+      ),
       body: Column(
         children: [
          

@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/screens/chatpy.dart';
-import 'package:frontend/screens/location.dart';
-import 'package:frontend/screens/profile.dart';
 import 'package:frontend/utils/colors.dart';
 import 'package:frontend/utils/utils.dart';
 
@@ -53,19 +50,53 @@ class Periods extends StatelessWidget {
               ),
             ],
           ),
-          Row(),
+          SizedBox(height: 30,),
           Row(
             children: [
               Padding(
-                padding: const EdgeInsets.all(12.0),
-                child: Text(
-                  "What would you like to do?",
-                  textScaleFactor: 1,
-                  style: TextStyle(color: black, fontWeight: FontWeight.bold),
-                ),
-              )
+                padding: EdgeInsets.all(12.0),
+                child: Icon(Icons.calendar_today),
+              ),
+              Text(
+                'September 2023',
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
             ],
           ),
+
+          Row(
+            children: List.generate(7, (index) {
+              final date = DateTime(2023, 9, 10).add(Duration(days: index));
+              final dayOfWeek = date.weekday;
+              final dayOfMonth = date.day;
+              return Expanded(
+                child: Padding(
+                  padding: EdgeInsets.all(4.0),
+                  child: Container(
+                    width: double.infinity,
+                    height: 60,
+                    decoration: BoxDecoration(
+                      color:
+                          dayOfWeek == DateTime.saturday || dayOfWeek == DateTime.sunday
+                              ? Colors.grey[300]
+                              : primarylight,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8),
+                      child: Text(
+                        'Day $dayOfMonth',
+                        style:
+                            TextStyle(color: textsec, fontWeight: FontWeight.bold),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  ),
+                ),
+              );
+            }),
+          ),
+          SizedBox(height: 40,),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
@@ -102,12 +133,16 @@ class Periods extends StatelessWidget {
                   },
                   child: Text("Access Chat")),
             ],
-          )
+          ),
+          
         ],
       ),
+      
+      bottomNavigationBar: CustomBottomNavigationBar(selectedIndex: 0, onItemTapped: (int value) {  },),
     );
   }
 }
+
 
 class LogPeriod extends StatefulWidget {
   const LogPeriod({super.key});
