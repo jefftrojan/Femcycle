@@ -118,7 +118,7 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
         index: _selectedIndex,
         children: <Widget>[
           ChatScreen(),
-          Periods(),
+          Periods(forecastedDates: [],),
           Stores(),
           Account(),
         ],
