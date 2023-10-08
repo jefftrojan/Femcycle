@@ -23,6 +23,6 @@ By leveraging GPT-3, FemCycle empowers users with knowledge and resources, contr
 
 Team:
 - Jeffrey Dauda Karau
-- Yves ISHIMWE
 - Sunday Sarah Moses
+- Yves ISHIMWE
 - Jabo Bugingo Prosper
