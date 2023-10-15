@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:frontend/screens/signin.dart';
 import 'package:frontend/utils/colors.dart';
 import 'package:dots_indicator/dots_indicator.dart';
@@ -105,13 +106,7 @@ class OnboardingStep extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          
-          Container(
-            width: imagesize,
-            height: imagesize,
-            child: Image.asset(content.image,
-            fit: BoxFit.cover,),
-          ),
+          Image.asset(content.image),
           SizedBox(
             height: 20,
           ),
@@ -128,7 +123,7 @@ class OnboardingStep extends StatelessWidget {
           ),
           Text(
             content.description,
-            style: TextStyle(fontSize: 16, color: Colors.blueGrey),
+            style: TextStyle(fontSize: 18),
             textAlign: TextAlign.center,
           )
         ],
