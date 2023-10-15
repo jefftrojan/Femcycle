@@ -98,6 +98,21 @@ class _ChatScreenState extends State<ChatScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        
+      elevation: 0, 
+       backgroundColor: Colors.white,
+       leading: Padding(
+         padding: const EdgeInsets.all(8.0),
+         child: CircleAvatar(
+          
+          backgroundImage: AssetImage("lib/assets/girlsclock.jpg"),
+          radius: 50, 
+          
+          
+             ),
+       ),
+      ),
       body: Column(
         children: [
          
@@ -228,82 +243,3 @@ class Message {
 }
 
 
-// custom appbar
-
-class CustomAppBar extends StatefulWidget {
-  @override
-  _CustomAppBarState createState() => _CustomAppBarState();
-}
-
-class _CustomAppBarState extends State<CustomAppBar> {
-  File? _image;
-
-  Future<void> _getImageFromGallery() async {
-    final pickedFile =
-        await ImagePicker().pickImage(source: ImageSource.gallery);
-
-    setState(() {
-      _image = File(pickedFile!.path);
-    });
-  }
-
-  Future<void> _getImageFromCamera() async {
-    final pickedFile =
-        await ImagePicker().pickImage(source: ImageSource.camera);
-
-    setState(() {
-      _image = File(pickedFile!.path);
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return AppBar(
-      title: Row(
-        children: [
-          Text('Hello, welcome back. I am your AI assistant. '),
-          GestureDetector(
-            onTap: () {
-              showModalBottomSheet(
-                context: context,
-                builder: (BuildContext context) {
-                  return SafeArea(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: <Widget>[
-                        ListTile(
-                          leading: Icon(Icons.photo_library),
-                          title: Text('Choose from Gallery'),
-                          onTap: () {
-                            _getImageFromGallery();
-                            Navigator.pop(context);
-                          },
-                        ),
-                        ListTile(
-                          leading: Icon(Icons.photo_camera),
-                          title: Text('Take a picture'),
-                          onTap: () {
-                            _getImageFromCamera();
-                            Navigator.pop(context);
-                          },
-                        ),
-                      ],
-                    ),
-                  );
-                },
-              );
-            },
-            child: CircleAvatar(
-              radius: 20,
-              backgroundColor: Colors.grey.shade300,
-              backgroundImage: _image != null ? FileImage(_image!) : null,
-              child: _image == null
-                  ? Icon(Icons.person, size: 20, color: Colors.grey)
-                  : null,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}

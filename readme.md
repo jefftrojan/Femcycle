@@ -1,10 +1,11 @@
 # FemCycle - Combating Period and Menstrual Poverty with AI
 
-Welcome to the FemCycle GitHub repository! FemCycle is a mobile application that uses AI technology to address period and menstrual poverty. This repository contains the source code and development history of the FemCycle application.
+Welcome to the FemCycle GitHub repository! FemCycle is a mobile application that uses AI technology(ChatBot) to address period and menstrual poverty. This repository contains the source code and development history of the FemCycle application.
 
 ## Structure
 
 The repository is organized as follows:
+- `backend/`: This directory contains backend code. It includes the prediction model for predicting menstrual cycles. 
 
 - `frontend/`: This directory contains the frontend code for the FemCycle application, developed with Flutter and Dart. It includes user interface components, screens, and the AI chatbot integration. FemCycle utilizes Firebase for authentication, data storage, and real-time updates. Firebase Cloud Functions are used to implement server-side logic.
   It also contains the AI model integration, specifically the GPT-3 model from OpenAI. It enables the AI chatbot assistant to provide information and support related to reproductive health and menstrual hygiene.
@@ -21,3 +22,8 @@ The integration of GPT-3 allows FemCycle users to engage in informative and pers
 
 By leveraging GPT-3, FemCycle empowers users with knowledge and resources, contributing to the mission of combatting period and menstrual poverty.
 
+Team:
+- Jeffrey Dauda Karau
+- Sunday Sarah Moses
+- Yves ISHIMWE
+- Jabo Bugingo Prosper

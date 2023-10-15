@@ -1,4 +1,4 @@
-//this file contains the utils: bottomnav, custom buttons,.....
+//this file contains the utils: bottomnav, custom buttons, onboarding content models.....
 
 import 'package:flutter/material.dart';
 import 'package:frontend/screens/chatpy.dart';
@@ -15,54 +15,8 @@ class User {
   User({required this.name, required this.email});
 }
 
-// calendar
+// custom appbar for chat
 
-class PredictedCalendar extends StatelessWidget {
-  final DateTime predictedDate;
-
-  PredictedCalendar({required this.predictedDate});
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        SizedBox(height: 30,),
-        TableCalendar(
-          focusedDay: predictedDate,
-          firstDay: predictedDate.subtract(Duration(days: 30)),
-          lastDay: predictedDate.add(Duration(days: 30)),
-          calendarFormat: CalendarFormat.week,
-
-
-          
-          selectedDayPredicate: (day) {
-            
-            
-            
-            return isSameDay(day, predictedDate);
-          },
-          
-          headerStyle: HeaderStyle(
-            formatButtonShowsNext: false,
-          ),
-          calendarStyle: CalendarStyle(
-            selectedDecoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color:primaryDark,  ),
-            selectedTextStyle: TextStyle(
-              color: Colors.white,  
-            ),
-          ),
-          
-        ),
-        Text(
-          'Predicted Date: ${predictedDate.day}/${predictedDate.month}/${predictedDate.year}',
-          style: TextStyle(fontWeight: FontWeight.bold),
-        ),
-      ],
-    );
-  }
-}
 
 
 // custom bottomnav
@@ -74,7 +28,6 @@ class CustomBottomNavigationBar extends StatelessWidget {
     required this.selectedIndex,
     required this.onItemTapped,
   });
-
 
   @override
   Widget build(BuildContext context) {
@@ -120,7 +73,6 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-    
       body: IndexedStack(
         index: _selectedIndex,
         children: <Widget>[
@@ -141,5 +93,4 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
     );
   }
 }
-
 

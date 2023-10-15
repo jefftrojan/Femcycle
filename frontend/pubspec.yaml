@@ -50,6 +50,8 @@ dependencies:
   chat_bubbles: ^1.5.0
   bubble: ^1.2.1
   image_picker: ^1.0.4
+  dots_indicator: ^3.0.0
+  google_sign_in: ^6.1.5
 
 dev_dependencies:
   flutter_test:
@@ -78,6 +80,11 @@ flutter:
   - .env
   - lib/assets/girlsclock.jpg
   - lib/assets/locations.jpg
+  - lib/assets/girlsflower.png
+  - lib/assets/femalecard.jpg
+  - lib/assets/google-logo.jpeg
+  - lib/assets/glogo.png
+  
  
 
   # An image asset can refer to one or more resolution-specific "variants", see
