@@ -6,6 +6,7 @@ import 'package:frontend/screens/cycletrack.dart';
 import 'package:frontend/screens/location.dart';
 import 'package:frontend/screens/profile.dart';
 import 'package:frontend/utils/colors.dart';
+import 'package:table_calendar/table_calendar.dart';
 
 class User {
   final String name;
@@ -14,8 +15,54 @@ class User {
   User({required this.name, required this.email});
 }
 
-// custom appbar for chat
+// calendar
 
+class PredictedCalendar extends StatelessWidget {
+  final DateTime predictedDate;
+
+  PredictedCalendar({required this.predictedDate});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        SizedBox(height: 30,),
+        TableCalendar(
+          focusedDay: predictedDate,
+          firstDay: predictedDate.subtract(Duration(days: 30)),
+          lastDay: predictedDate.add(Duration(days: 30)),
+          calendarFormat: CalendarFormat.week,
+
+
+          
+          selectedDayPredicate: (day) {
+            
+            
+            
+            return isSameDay(day, predictedDate);
+          },
+          
+          headerStyle: HeaderStyle(
+            formatButtonShowsNext: false,
+          ),
+          calendarStyle: CalendarStyle(
+            selectedDecoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color:primaryDark,  ),
+            selectedTextStyle: TextStyle(
+              color: Colors.white,  
+            ),
+          ),
+          
+        ),
+        Text(
+          'Predicted Date: ${predictedDate.day}/${predictedDate.month}/${predictedDate.year}',
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
+      ],
+    );
+  }
+}
 
 
 // custom bottomnav
@@ -35,25 +82,25 @@ class CustomBottomNavigationBar extends StatelessWidget {
       type: BottomNavigationBarType.fixed,
       items: const <BottomNavigationBarItem>[
         BottomNavigationBarItem(
-          icon: Icon(Icons.messenger_rounded,color: common,),
+          icon: Icon(Icons.messenger_rounded,color: black,),
           label: 'Chat',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.water_drop,color: common,),
+          icon: Icon(Icons.water_drop,color: black,),
           label: 'Periods',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.location_pin,color: common,),
+          icon: Icon(Icons.location_pin,color: black,),
           
           label: 'Stores Nearby',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.person,color: common,),
+          icon: Icon(Icons.person,color: black,),
           label: 'Profile',
         ),
       ],
       currentIndex: selectedIndex,
-      selectedItemColor:primary,
+      selectedItemColor:primaryDark,
       showSelectedLabels: true,
       onTap: onItemTapped,
       unselectedItemColor: common,
@@ -78,7 +125,7 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
         index: _selectedIndex,
         children: <Widget>[
           ChatScreen(),
-          Periods(),
+          CyclePredictionScreen(),
           Stores(),
           Account(),
         ],
