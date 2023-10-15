@@ -14,6 +14,38 @@ class User {
 
   User({required this.name, required this.email});
 }
+// calendar
+class PredictedCalendar extends StatelessWidget {
+  final DateTime predictedDate;
+
+  PredictedCalendar({required this.predictedDate});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        TableCalendar(
+          focusedDay: predictedDate,
+          firstDay: predictedDate.subtract(Duration(days: 30)),
+          lastDay: predictedDate.add(Duration(days: 30)),
+          calendarFormat: CalendarFormat.week,
+          selectedDayPredicate: (day) {
+            // Customize selected day style if needed
+            return isSameDay(day, predictedDate);
+          },
+          headerStyle: HeaderStyle(
+            formatButtonShowsNext: false,
+          ),
+          // Add more customization and event handling as needed
+        ),
+        Text(
+          'Predicted Date: ${predictedDate.day}/${predictedDate.month}/${predictedDate.year}',
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
+      ],
+    );
+  }
+}
 
 // custom appbar for chat
 
