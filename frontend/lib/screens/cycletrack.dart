@@ -23,11 +23,16 @@ class _CyclePredictionScreenState extends State<CyclePredictionScreen> {
   }
 
   Future<void> fetchPredictedDate() async {
-    final response = await http.get(Uri.parse('http://127.0.0.1:8000/predict')); // Replace with your FastAPI server URL
+    final apiUrl = "http://127.0.0.1:8000/predict";
+    final response = await http.post(
+      Uri.parse(apiUrl),
+      headers: {"Content-Type": "application/json"},
+      body: jsonEncode({"key": "value"}),
+    );
     if (response.statusCode == 200) {
       final Map<String, dynamic> data = json.decode(response.body);
       setState(() {
-        predictedDate = data['forecasted_dates'];
+        predictedDate = data['prediction'];
       });
     } else {
       setState(() {
@@ -50,7 +55,8 @@ class _CyclePredictionScreenState extends State<CyclePredictionScreen> {
               color: Colors.black,
             ),
             onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => BottomNavScreen()));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => BottomNavScreen()));
             },
           ),
         ),
@@ -95,6 +101,7 @@ class _CyclePredictionScreenState extends State<CyclePredictionScreen> {
                 ),
                 const SizedBox(height: 30),
                 PredictedCalendar(predictedDate: DateTime(2023, 10, 20)),
+
                 const SizedBox(height: 40),
                 const Row(
                   children: [
@@ -121,32 +128,44 @@ class _CyclePredictionScreenState extends State<CyclePredictionScreen> {
                         child: Text("Log Period"),
                         style: ElevatedButton.styleFrom(
                           primary: accentchatalt,
-                          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 10),
                         ),
                         onPressed: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => LogDates()));
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => LogDates()));
                         },
                       ),
                       SizedBox(width: 8),
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
                           primary: accentchatalt,
-                          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 10),
                         ),
                         child: Text("Previous Periods"),
                         onPressed: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => Archive()));
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Archive()));
                         },
                       ),
                       SizedBox(width: 8),
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
                           primary: accentchatalt,
-                          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 10),
                         ),
                         child: Text("Access Chat"),
                         onPressed: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => ChatScreen()));
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => ChatScreen()));
                         },
                       ),
                     ],
@@ -157,6 +176,7 @@ class _CyclePredictionScreenState extends State<CyclePredictionScreen> {
           ),
         ),
       ),
+      
     );
   }
 }
@@ -186,7 +206,8 @@ class _LogDatesState extends State<LogDates> {
   final CalendarFormat _calendarFormat = CalendarFormat.month;
   DateTime _selectedDay = DateTime.now();
   DateTime _focusedDay = DateTime.now();
-  DateTime _lastcycleDate = DateTime(2023, 10, 20); // Change this to the last cycle date
+  DateTime _lastcycleDate =
+      DateTime(2023, 10, 20); // Change this to the last cycle date
 
   @override
   Widget build(BuildContext context) {
@@ -271,7 +292,8 @@ class _LogDatesState extends State<LogDates> {
               ),
               SizedBox(height: 40),
               Card(
-                elevation: 4, // You need to complete this part with more UI elements
+                elevation:
+                    4, // You need to complete this part with more UI elements
               )
             ],
           ),

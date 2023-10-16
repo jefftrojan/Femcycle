@@ -30,16 +30,16 @@ class PredictedCalendar extends StatelessWidget {
           lastDay: predictedDate.add(Duration(days: 30)),
           calendarFormat: CalendarFormat.week,
           selectedDayPredicate: (day) {
-            // Customize selected day style if needed
             return isSameDay(day, predictedDate);
           },
           headerStyle: HeaderStyle(
             formatButtonShowsNext: false,
           ),
-          // Add more customization and event handling as needed
         ),
+        SizedBox(height: 30,),
         Text(
-          'Predicted Date: ${predictedDate.day}/${predictedDate.month}/${predictedDate.year}',
+        "Predicted Period Date: ${predictedDate.toLocal()}",
+
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
       ],

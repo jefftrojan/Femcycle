@@ -11,3 +11,5 @@ tzdata
 uvicorn
 fastapi
 pydantic
+joblib
+flask_cors
