@@ -45,7 +45,7 @@ class _AuthScreenState extends State<AuthScreen> {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => const Stores(), // Replace with the actual ChatScreen class
+          builder: (context) => Stores(), // Replace with the actual ChatScreen class
         ),
       );
     } else {
