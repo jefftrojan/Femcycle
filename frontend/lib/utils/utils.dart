@@ -16,36 +16,44 @@ class User {
 }
 // calendar
 class PredictedCalendar extends StatelessWidget {
-  final DateTime predictedDate;
+  final DateTime loggedDate;
 
-  PredictedCalendar({required this.predictedDate});
+  PredictedCalendar({super.key, required this.loggedDate});
+
+  DateTime predictNextPeriodDate(DateTime loggedDate) {
+    // Add your prediction logic here.
+    // For example, add 28 days to the logged date.
+    return loggedDate.add(Duration(days: 28));
+  }
 
   @override
   Widget build(BuildContext context) {
+    DateTime predictedDate = predictNextPeriodDate(loggedDate);
+
     return Column(
       children: [
         TableCalendar(
-          focusedDay: predictedDate,
-          firstDay: predictedDate.subtract(Duration(days: 30)),
-          lastDay: predictedDate.add(Duration(days: 30)),
+          focusedDay: loggedDate,
+          firstDay: loggedDate.subtract(Duration(days: 30)),
+          lastDay: loggedDate.add(Duration(days: 30)),
           calendarFormat: CalendarFormat.week,
           selectedDayPredicate: (day) {
-            return isSameDay(day, predictedDate);
+            return isSameDay(day, loggedDate);
           },
           headerStyle: HeaderStyle(
             formatButtonShowsNext: false,
           ),
         ),
-        SizedBox(height: 30,),
+        SizedBox(height: 30),
         Text(
-        "Predicted Period Date: ${predictedDate.toLocal()}",
-
+          "Predicted Period Date: ${predictedDate.toLocal()}",
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
       ],
     );
   }
 }
+
 // models --->onboarding screens content
 class OnboardingContent {
   final String image;

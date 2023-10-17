@@ -205,15 +205,15 @@ class _AccountState extends State<Account> {
                     ),
                     subtitle: Text(userLocation),
                     
-                    trailing: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        primary: Colors.white,
+                    // trailing: ElevatedButton(
+                    //   style: ElevatedButton.styleFrom(
+                    //     primary: Colors.white,
                         
-                      ),
+                    //   ),
                       
-                      onPressed: _openUpdateForm,
-                      child: Text('Update Details', style: TextStyle(color: primary),),
-                    ),
+                    //   // onPressed: _openUpdateForm,
+                    //   // child: Text('Update Details', style: TextStyle(color: primary),),
+                    // ),
                   ),
                 ],
               ),
@@ -222,42 +222,42 @@ class _AccountState extends State<Account> {
               height: 40,
             ),
             // update dates
-            Text(
-              "First time user?\nAdd previous cycles dates (up to 3).",
-              style: TextStyle(fontSize: 17.0, fontWeight: FontWeight.bold),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            Card(
-              elevation: 4.0,
-              child: ListTile(
-                onTap: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => UpdateDateFormOverlay(),
-                  ));
-                },
-                contentPadding: EdgeInsets.all(16.0),
-                title: Container(
-                  decoration: BoxDecoration(
+            // Text(
+            //   "First time user?\nAdd previous cycles dates (up to 3).",
+            //   style: TextStyle(fontSize: 17.0, fontWeight: FontWeight.bold),
+            // ),
+            // SizedBox(
+            //   height: 20,
+            // ),
+            // Card(
+            //   elevation: 4.0,
+            //   child: ListTile(
+            //     onTap: () {
+            //       Navigator.of(context).push(MaterialPageRoute(
+            //         builder: (context) => UpdateDateFormOverlay(),
+            //       ));
+            //     },
+            //     contentPadding: EdgeInsets.all(16.0),
+            //     title: Container(
+            //       decoration: BoxDecoration(
                     
-                    borderRadius: BorderRadius.circular(20),
-                    color: primarylight,
-                  ),
-                  padding: EdgeInsets.all(16.0),
-                  width: 50.0,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Text("Add Date",
-                      style: TextStyle(color: black),),
-                      Icon(Icons.add,
-                      color: black,)
-                    ],
-                  ),
-                ),
-              ),
-            ),
+            //         borderRadius: BorderRadius.circular(20),
+            //         color: primarylight,
+            //       ),
+            //       padding: EdgeInsets.all(16.0),
+            //       width: 50.0,
+            //       child: Row(
+            //         mainAxisAlignment: MainAxisAlignment.end,
+            //         children: [
+            //           Text("Add Date",
+            //           style: TextStyle(color: black),),
+            //           Icon(Icons.add,
+            //           color: black,)
+            //         ],
+            //       ),
+            //     ),
+            //   ),
+            // ),
           ]),
     ));
   }

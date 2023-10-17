@@ -1,10 +1,14 @@
-import 'dart:convert';
+import 'package:frontend/screens/logdates.dart';
+import 'package:http/http.dart' as http;
+
+
 import 'package:flutter/material.dart';
 import 'package:frontend/screens/chatpy.dart';
-import 'package:frontend/utils/colors.dart';
 import 'package:frontend/utils/utils.dart';
-import 'package:http/http.dart' as http;
-import 'package:table_calendar/table_calendar.dart';
+import 'dart:convert';
+
+import '../utils/colors.dart';
+
 
 class CyclePredictionScreen extends StatefulWidget {
   const CyclePredictionScreen({Key? key});
@@ -14,29 +18,23 @@ class CyclePredictionScreen extends StatefulWidget {
 }
 
 class _CyclePredictionScreenState extends State<CyclePredictionScreen> {
-  String predictedDate = "";
+  DateTime _predictedDate = DateTime.now(); // Initialize with the current date
 
   @override
   void initState() {
     super.initState();
-    fetchPredictedDate(); // Fetch the predicted date when the screen loads.
+    _fetchPredictedDate(); // Fetch the predicted date when the screen loads.
   }
 
-  Future<void> fetchPredictedDate() async {
-    final apiUrl = "http://127.0.0.1:8000/predict";
-    final response = await http.post(
-      Uri.parse(apiUrl),
-      headers: {"Content-Type": "application/json"},
-      body: jsonEncode({"key": "value"}),
-    );
+  Future<void> _fetchPredictedDate() async {
+    final apiUrl = "http://127.0.0.1:5000/predict"; 
+    final response = await http.get(Uri.parse(apiUrl));
+
     if (response.statusCode == 200) {
       final Map<String, dynamic> data = json.decode(response.body);
+      final String predictedDateStr = data['predicted_date'];
       setState(() {
-        predictedDate = data['prediction'];
-      });
-    } else {
-      setState(() {
-        predictedDate = 'Error fetching date';
+        _predictedDate = DateTime.parse(predictedDateStr);
       });
     }
   }
@@ -79,7 +77,7 @@ class _CyclePredictionScreenState extends State<CyclePredictionScreen> {
                 const SizedBox(height: 40),
                 Container(
                   padding: const EdgeInsets.all(8),
-                  height: 40,
+                  height: 60,
                   decoration: BoxDecoration(
                     color: primaryDark,
                     borderRadius: BorderRadius.circular(10),
@@ -87,7 +85,7 @@ class _CyclePredictionScreenState extends State<CyclePredictionScreen> {
                   child: Row(
                     children: [
                       Text(
-                        "Your Period is likely to start on or around $predictedDate",
+                        "Your Period is likely to start on or around ${_predictedDate.toLocal()}",
                         textScaleFactor: 1.1,
                         style: const TextStyle(
                           color: Color(0xFF090A0A),
@@ -100,8 +98,7 @@ class _CyclePredictionScreenState extends State<CyclePredictionScreen> {
                   ),
                 ),
                 const SizedBox(height: 30),
-                PredictedCalendar(predictedDate: DateTime(2023, 10, 20)),
-
+                PredictedCalendar(loggedDate: _predictedDate), // Pass _predictedDate
                 const SizedBox(height: 40),
                 const Row(
                   children: [
@@ -170,135 +167,21 @@ class _CyclePredictionScreenState extends State<CyclePredictionScreen> {
                       ),
                     ],
                   ),
-                )
+                ),
               ],
             ),
           ),
         ),
       ),
-      
     );
   }
 }
 
-class Archive extends StatefulWidget {
-  const Archive({Key? key});
+class Archive extends StatelessWidget {
+  const Archive({super.key});
 
-  @override
-  State<Archive> createState() => _ArchiveState();
-}
-
-class _ArchiveState extends State<Archive> {
   @override
   Widget build(BuildContext context) {
     return const Placeholder();
-  }
-}
-
-class LogDates extends StatefulWidget {
-  const LogDates({Key? key});
-
-  @override
-  State<LogDates> createState() => _LogDatesState();
-}
-
-class _LogDatesState extends State<LogDates> {
-  final CalendarFormat _calendarFormat = CalendarFormat.month;
-  DateTime _selectedDay = DateTime.now();
-  DateTime _focusedDay = DateTime.now();
-  DateTime _lastcycleDate =
-      DateTime(2023, 10, 20); // Change this to the last cycle date
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Log Period Date'),
-      ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            children: [
-              TableCalendar(
-                firstDay: DateTime(2000),
-                lastDay: DateTime(2050),
-                focusedDay: _focusedDay,
-                calendarFormat: _calendarFormat,
-                selectedDayPredicate: (day) {
-                  return isSameDay(day, _selectedDay);
-                },
-                onDaySelected: (selectedDay, focusedDay) {
-                  setState(() {
-                    _selectedDay = selectedDay;
-                    _focusedDay = focusedDay;
-                  });
-                },
-              ),
-              const SizedBox(height: 16.0),
-              Container(
-                padding: const EdgeInsets.all(8),
-                height: 40,
-                decoration: BoxDecoration(
-                  color: primaryDark,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Row(
-                  children: [
-                    Text(
-                      "Your Period is likely to start on or around ${_lastcycleDate.toLocal()}",
-                      textScaleFactor: 1.1,
-                      style: TextStyle(
-                        color: Color(0xFF090A0A),
-                        fontSize: 14,
-                        fontFamily: 'Inter',
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 40),
-              const Row(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Text(
-                      "Last Menstrual Cycle",
-                      textScaleFactor: 1.5,
-                      style: TextStyle(
-                        color: Color(0xFF090A0A),
-                        fontFamily: 'Inter',
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(height: 40),
-              Card(
-                elevation: 4,
-                child: Row(
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.all(8),
-                      child: ListTile(
-                        leading: Icon(Icons.punch_clock_outlined),
-                        title: Text("Started on ${_lastcycleDate.toLocal()}"),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(height: 40),
-              Card(
-                elevation:
-                    4, // You need to complete this part with more UI elements
-              )
-            ],
-          ),
-        ),
-      ),
-    );
   }
 }

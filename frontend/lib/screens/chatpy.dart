@@ -1,15 +1,14 @@
 import 'dart:convert';
-import 'dart:io';
+// import 'dart:io';
 import 'package:chat_bubbles/bubbles/bubble_normal.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:frontend/screens/cycletrack.dart';
-import 'package:frontend/screens/location.dart';
-import 'package:frontend/screens/profile.dart';
+// import 'package:frontend/screens/cycletrack.dart';
+// import 'package:frontend/screens/location.dart';
+// import 'package:frontend/screens/profile.dart';
 import 'package:frontend/utils/colors.dart';
-import 'package:frontend/utils/utils.dart';
 import 'package:http/http.dart' as http;
-import 'package:image_picker/image_picker.dart';
+// import 'package:image_picker/image_picker.dart';
 
 class ChatScreen extends StatefulWidget {
   const ChatScreen({super.key});
