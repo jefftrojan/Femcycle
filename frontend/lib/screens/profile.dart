@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:frontend/screens/updatedate_firsttimeuser.dart';
 import 'package:frontend/utils/colors.dart';
 import 'package:frontend/utils/utils.dart';
 import 'package:image_picker/image_picker.dart';
@@ -37,6 +36,84 @@ class _AccountState extends State<Account> {
       });
     }
   }
+  // update info form 
+  void _openUpdateForm() {
+  showDialog(
+    context: context,
+    builder: (context) => AlertDialog(
+      title: Text("Update Details"),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          TextField(
+            controller: _nameController,
+            decoration: InputDecoration(
+              labelText: 'Name',
+              // Customize the text field's style
+              labelStyle: TextStyle(color: black),
+              focusedBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color: black),
+              ),
+            ),
+          ),
+          TextField(
+            controller: _locationController,
+            decoration: InputDecoration(
+              labelText: 'Location',
+              // Customize the text field's style
+              labelStyle: TextStyle(color: black),
+              focusedBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color: black),
+              ),
+            ),
+          ),
+        ],
+      ),
+      actions: [
+        ElevatedButton(
+          onPressed: () {
+            _updateDetails();
+            Navigator.of(context).pop();
+          },
+          style: ElevatedButton.styleFrom(
+            // Customize the button's style
+            primary: Colors.white,
+          ),
+          child: Text(
+            'Submit',
+            style: TextStyle(
+              color: black, // Customize button text color
+            ),
+          ),
+        ),
+      ],
+      // Customize the dialog's background color
+      backgroundColor: Colors.white,
+    ),
+  );
+}
+
+
+
+  // updated info display
+  Future<void> _updateDetails() async {
+  final userId = _auth.currentUser?.uid;
+  if (userId != null) {
+    try {
+      await _firestore.collection('bio').doc(userId).set({
+        'name': _nameController.text,
+        'location': _locationController.text,
+      });
+      setState(() {
+        userName = _nameController.text;
+        userLocation = _locationController.text;
+      });
+    } catch (e) {
+      print('Error updating details: $e');
+    }
+  }
+}
+
 
   @override
   void initState() {
@@ -64,55 +141,7 @@ class _AccountState extends State<Account> {
     }
   }
 
-  void _openUpdateForm() {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: Text("Update Details"),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            TextField(
-              controller: _nameController,
-              decoration: InputDecoration(labelText: 'Name'),
-            ),
-            TextField(
-              controller: _locationController,
-              decoration: InputDecoration(labelText: 'Location'),
-            ),
-          ],
-        ),
-        actions: [
-          ElevatedButton(
-            onPressed: () {
-              _updateDetails();
-              Navigator.of(context).pop();
-            },
-            child: Text('Submit'),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Future<void> _updateDetails() async {
-    final userId = _auth.currentUser?.uid;
-    if (userId != null) {
-      try {
-        await _firestore.collection('bio').doc(userId).set({
-          'name': _nameController.text,
-          'location': _locationController.text,
-        });
-        setState(() {
-          userName = _nameController.text;
-          userLocation = _locationController.text;
-        });
-      } catch (e) {
-        print('Error updating details: $e');
-      }
-    }
-  }
-
+ 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -149,17 +178,17 @@ class _AccountState extends State<Account> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            // GestureDetector(
-            //   onTap: _pickImage,
-            //   child: Center(
-            //     child: CircleAvatar(
-            //       radius: 50,
-            //       backgroundImage: _imageProvider != null
-            //           ? _imageProvider
-            //           : AssetImage('lib/assets/girlsclock.jpg'), //
-            //     ),
-            //   ),
-            // ),
+            GestureDetector(
+              onTap: _pickImage,
+              child: Center(
+                child: CircleAvatar(
+                  radius: 80,
+                  backgroundImage: _imageProvider != null
+                      ? _imageProvider
+                      : AssetImage('lib/assets/girlsclock.jpg'), //
+                ),
+              ),
+            ),
             
             
             // Bio
@@ -205,15 +234,15 @@ class _AccountState extends State<Account> {
                     ),
                     subtitle: Text(userLocation),
                     
-                    // trailing: ElevatedButton(
-                    //   style: ElevatedButton.styleFrom(
-                    //     primary: Colors.white,
+                    trailing: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.white,
                         
-                    //   ),
+                      ),
                       
-                    //   // onPressed: _openUpdateForm,
-                    //   // child: Text('Update Details', style: TextStyle(color: primary),),
-                    // ),
+                      onPressed: _openUpdateForm,
+                      child: Text('Update Details', style: TextStyle(color: primary),),
+                    ),
                   ),
                 ],
               ),
@@ -262,3 +291,4 @@ class _AccountState extends State<Account> {
     ));
   }
 }
+

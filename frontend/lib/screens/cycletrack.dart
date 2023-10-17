@@ -1,14 +1,12 @@
 import 'package:frontend/screens/logdates.dart';
 import 'package:http/http.dart' as http;
 
-
 import 'package:flutter/material.dart';
 import 'package:frontend/screens/chatpy.dart';
 import 'package:frontend/utils/utils.dart';
 import 'dart:convert';
 
 import '../utils/colors.dart';
-
 
 class CyclePredictionScreen extends StatefulWidget {
   const CyclePredictionScreen({Key? key});
@@ -27,7 +25,7 @@ class _CyclePredictionScreenState extends State<CyclePredictionScreen> {
   }
 
   Future<void> _fetchPredictedDate() async {
-    final apiUrl = "http://127.0.0.1:5000/predict"; 
+    final apiUrl = "http://127.0.0.1:5000/predict";
     final response = await http.get(Uri.parse(apiUrl));
 
     if (response.statusCode == 200) {
@@ -98,7 +96,8 @@ class _CyclePredictionScreenState extends State<CyclePredictionScreen> {
                   ),
                 ),
                 const SizedBox(height: 30),
-                PredictedCalendar(loggedDate: _predictedDate), // Pass _predictedDate
+                PredictedCalendar(
+                    loggedDate: _predictedDate), // Pass _predictedDate
                 const SizedBox(height: 40),
                 const Row(
                   children: [
@@ -182,69 +181,6 @@ class Archive extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold();
   }
-}
-
-// periodslists for archive
-class Period {
-  final String monthInitial;
-  final String title;
-  final String description;
-
-  Period({
-    required this.monthInitial,
-    required this.title,
-    required this.description,
-  });
-}
-
-class PreviousPeriodsList extends StatelessWidget {
-  final List<Period> previousPeriods;
-
-  PreviousPeriodsList({required this.previousPeriods});
-
-  @override
-  Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: previousPeriods.length,
-      itemBuilder: (context, index) {
-        final period = previousPeriods[index];
-
-        return ListTile(
-          leading: CircleAvatar(
-            child: Text(period.monthInitial),
-          ),
-          title: Text(period.title),
-          subtitle: Text(period.description),
-        );
-      },
-    );
-  }
-}
-
-void main() {
-  final List<Period> periodData = fetchPeriods(); // Fetch data from the database
-
-  // Sort the data in descending order by title
-  periodData.sort((a, b) => b.title.compareTo(a.title));
-
-  runApp(MaterialApp(
-    home: Scaffold(
-      appBar: AppBar(
-        title: Text('Previous Periods'),
-      ),
-      body: PreviousPeriodsList(
-        previousPeriods: periodData,
-      ),
-    ),
-  ));
-}
-
-List<Period> fetchPeriods() {
-  
-  return [
-    Period(monthInitial: 'J', title: 'January 2023', description: 'Description of January period'),
-    Period(monthInitial: 'F', title: 'February 2023', description: 'Description of February period'),
-  ];
 }
