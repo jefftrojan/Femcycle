@@ -324,14 +324,16 @@ class _LogDatesState extends State<LogDates> {
                 ),
                 child: Row(
                   children: [
-                    Text(
-                      "Your Period is likely to start on or around ${_predictedDate.toLocal()} ",
-                      textScaleFactor: 1.1,
-                      style: const TextStyle(
-                        color: Color(0xFF090A0A),
-                        fontSize: 14,
-                        fontFamily: 'Inter',
-                        fontWeight: FontWeight.w600,
+                    Flexible(
+                      child: Text(
+                        "Your Period is likely to start on or around ${_predictedDate.toLocal()} ",
+                        textScaleFactor: 1.1,
+                        style: const TextStyle(
+                          color: Color(0xFF090A0A),
+                          fontSize: 14,
+                          fontFamily: 'Inter',
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
                     ),
                   ],
