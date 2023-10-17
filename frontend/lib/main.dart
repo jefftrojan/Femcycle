@@ -29,12 +29,7 @@ class MyApp extends StatelessWidget {
       ),
       debugShowCheckedModeBanner: false,
       title: '',
-<<<<<<< Updated upstream
       home: SplashScreenWidget(),
-       
-=======
-      home: CyclePredictionScreen(),
->>>>>>> Stashed changes
     );
   }
 }
