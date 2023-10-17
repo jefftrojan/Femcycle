@@ -14,7 +14,7 @@ void main() async {
   await dotenv.load(fileName: ".env");
   // Load and initialize Firebase
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  
+
   runApp(const MyApp());
 }
 
@@ -23,11 +23,18 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return  MaterialApp(
+    return MaterialApp(
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.deepPurple),
+      ),
       debugShowCheckedModeBanner: false,
       title: '',
+<<<<<<< Updated upstream
       home: SplashScreenWidget(),
        
+=======
+      home: CyclePredictionScreen(),
+>>>>>>> Stashed changes
     );
   }
 }

@@ -33,14 +33,14 @@ class _StoresState extends State<Stores> {
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
           decoration: BoxDecoration(
             color: Colors.grey[200],
-            borderRadius: BorderRadius.circular(30.0),
+            borderRadius: BorderRadius.circular(8.0),
           ),
           child: const TextField(
             decoration: InputDecoration(
                 hintText: "Enter your location",
                 icon: Icon(Icons.search),
                 border: InputBorder.none,
-                fillColor: primarylight),
+                fillColor: primaryDark),
           ),
         ),
         // Transportation Options
@@ -55,29 +55,34 @@ class _StoresState extends State<Stores> {
           onStepCancel: () {
             // Handle cancel button
           },
-          steps: [
+          steps: const [
             Step(
               title: Icon(Icons.directions_walk),
               content: Text('Choose to walk to the store'),
+              isActive: true,
+              state: StepState.editing,
             ),
             Step(
               title: Icon(Icons.directions_car),
               content: Text('Choose to drive to the store'),
+              state: StepState.editing,
             ),
             Step(
               title: Icon(Icons.directions_bike),
               content: Text('Choose to bike to the store'),
+              state: StepState.editing,
             ),
             Step(
               title: Icon(Icons.directions_transit),
               content: Text('Choose to take the train to the store'),
+              state: StepState.editing,
             ),
           ],
         ),
         Expanded(
           child: ListView(
             children: [
-              StoreCard("Store 1"),
+              StoreCard("This feature is coming soon!"),
               StoreCard("Store 2"),
               StoreCard("Store 3"),
             ],
