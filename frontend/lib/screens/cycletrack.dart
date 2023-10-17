@@ -185,3 +185,66 @@ class Archive extends StatelessWidget {
     return const Placeholder();
   }
 }
+
+// periodslists for archive
+class Period {
+  final String monthInitial;
+  final String title;
+  final String description;
+
+  Period({
+    required this.monthInitial,
+    required this.title,
+    required this.description,
+  });
+}
+
+class PreviousPeriodsList extends StatelessWidget {
+  final List<Period> previousPeriods;
+
+  PreviousPeriodsList({required this.previousPeriods});
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      itemCount: previousPeriods.length,
+      itemBuilder: (context, index) {
+        final period = previousPeriods[index];
+
+        return ListTile(
+          leading: CircleAvatar(
+            child: Text(period.monthInitial),
+          ),
+          title: Text(period.title),
+          subtitle: Text(period.description),
+        );
+      },
+    );
+  }
+}
+
+void main() {
+  final List<Period> periodData = fetchPeriods(); // Fetch data from the database
+
+  // Sort the data in descending order by title
+  periodData.sort((a, b) => b.title.compareTo(a.title));
+
+  runApp(MaterialApp(
+    home: Scaffold(
+      appBar: AppBar(
+        title: Text('Previous Periods'),
+      ),
+      body: PreviousPeriodsList(
+        previousPeriods: periodData,
+      ),
+    ),
+  ));
+}
+
+List<Period> fetchPeriods() {
+  
+  return [
+    Period(monthInitial: 'J', title: 'January 2023', description: 'Description of January period'),
+    Period(monthInitial: 'F', title: 'February 2023', description: 'Description of February period'),
+  ];
+}

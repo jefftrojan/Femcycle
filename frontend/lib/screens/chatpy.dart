@@ -1,17 +1,13 @@
-import 'dart:convert';
-// import 'dart:io';
-import 'package:chat_bubbles/bubbles/bubble_normal.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
-// import 'package:frontend/screens/cycletrack.dart';
-// import 'package:frontend/screens/location.dart';
-// import 'package:frontend/screens/profile.dart';
-import 'package:frontend/utils/colors.dart';
 import 'package:http/http.dart' as http;
-// import 'package:image_picker/image_picker.dart';
+import 'dart:convert';
+import 'package:flutter/material.dart';
+import 'package:chat_bubbles/bubbles/bubble_normal.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+
+import '../utils/colors.dart';
 
 class ChatScreen extends StatefulWidget {
-  const ChatScreen({super.key});
+  const ChatScreen({Key? key});
 
   @override
   State<ChatScreen> createState() => _ChatScreenState();
@@ -21,16 +17,15 @@ class _ChatScreenState extends State<ChatScreen> {
   @override
   void initState() {
     super.initState();
-    // welcome message goes here
-
-    msgs.insert(0,Message(false, "Hello there, Welcome back! I am your AI assistant. You can ask me anything about menstrual hygiene and reproductive health."));
+    msgs.insert(
+        0,
+        Message(false,
+            "Hello there, Welcome back! I am your AI assistant. You can ask me anything about menstrual hygiene and reproductive health."));
 
     loadEnvironmentVariables();
   }
 
   String apiKey = "";
-
-  
 
   Future<void> loadEnvironmentVariables() async {
     await dotenv.load(fileName: ".env");
@@ -46,9 +41,17 @@ class _ChatScreenState extends State<ChatScreen> {
 
   void sendMsg() async {
     String text = controller.text;
-    // String apiKey = apiKey;
 
     controller.clear();
+
+    if (!isRelevantQuery(text)) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+            content: Text("Please ask a question related to menstruation or reproductive health."))
+      );
+      return;
+    }
+
     try {
       if (text.isNotEmpty) {
         setState(() {
@@ -86,48 +89,42 @@ class _ChatScreenState extends State<ChatScreen> {
         }
       }
     } on Exception {
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-          content: Text("Some error occurred, please try again!")));
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Some error occurred, please try again!"))
+      );
     }
   }
 
-    
+  bool isRelevantQuery(String text) {
+    final relevantKeywords = ["menstruation", "reproductive health", "period", "ovulation"];
 
+    for (final keyword in relevantKeywords) {
+      if (text.toLowerCase().contains(keyword)) {
+        return true;
+      }
+    }
+
+    return false;
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        
-      elevation: 0, 
-       backgroundColor: Colors.white,
-       leading: Padding(
-         padding: const EdgeInsets.all(8.0),
-         child: CircleAvatar(
-          
-          backgroundImage: AssetImage("lib/assets/girlsclock.jpg"),
-          radius: 50, 
-          
-          
-             ),
-       ),
+        elevation: 0,
+        backgroundColor: Colors.white,
+        leading: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: CircleAvatar(
+            backgroundImage: AssetImage("lib/assets/girlsclock.jpg"),
+            radius: 50,
+          ),
+        ),
       ),
       body: Column(
         children: [
-         
-          
-          // Visibility(child: BubbleNormal(
-          // text: "Hello there,\nWelcome back. I am your ai assistant. You can ask me anything about menstrual hygiene and reproductive health,",
-          // textStyle: TextStyle(color: Colors.white, fontWeight: FontWeight.w100),
-          // isSender: false,
-          // color: primarylight,
-          // ),
-          
-         
-          // ),
           Expanded(
             child: ListView.builder(
-              
                 controller: scrollController,
                 itemCount: msgs.length,
                 shrinkWrap: true,
@@ -138,7 +135,6 @@ class _ChatScreenState extends State<ChatScreen> {
                       child: isTyping && index == 0
                           ? Column(
                               children: [
-                                
                                 BubbleNormal(
                                   text: msgs[0].msg,
                                   isSender: true,
@@ -159,7 +155,7 @@ class _ChatScreenState extends State<ChatScreen> {
                               color: msgs[index].isSender
                                   ? accentchatalt
                                   : common,
-                ));
+                            ));
                 }),
           ),
           Row(
@@ -175,24 +171,20 @@ class _ChatScreenState extends State<ChatScreen> {
                         borderRadius: BorderRadius.circular(10)),
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 8),
-                      
                       child: TextField(
-                        
                         controller: controller,
                         textCapitalization: TextCapitalization.sentences,
                         onSubmitted: (value) {
                           sendMsg();
                         },
-                        
                         textInputAction: TextInputAction.send,
                         showCursor: true,
-                        
                         decoration: const InputDecoration(
                           filled: true,
                           fillColor: primarylight,
-                          
-                            border: InputBorder.none, hintText: "Ask something..."),
-                            
+                          border: InputBorder.none,
+                          hintText: "Ask something...",
+                        ),
                       ),
                     ),
                   ),
@@ -218,27 +210,20 @@ class _ChatScreenState extends State<ChatScreen> {
                 width: 8,
                 height: 10,
               )
-
             ],
           ),
-          SizedBox(height: 20,)
+          const SizedBox(
+            height: 20,
+          ),
         ],
       ),
-      
-
-      // implement bottom navigation
-     
-    
     );
   }
 }
 
-
-// message class
 class Message {
   bool isSender;
   String msg;
+
   Message(this.isSender, this.msg);
 }
-
-
