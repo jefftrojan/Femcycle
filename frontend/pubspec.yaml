@@ -55,6 +55,7 @@ dependencies:
   font_awesome_flutter: ^9.1.0
   google_maps_flutter: ^2.4.0
   location: ^4.4.0
+  intl: ^0.18.1
 
 dev_dependencies:
   flutter_test:

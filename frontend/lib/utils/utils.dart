@@ -6,6 +6,7 @@ import 'package:frontend/screens/cycletrack.dart';
 import 'package:frontend/screens/location.dart';
 import 'package:frontend/screens/profile.dart';
 import 'package:frontend/utils/colors.dart';
+import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class User {
@@ -29,6 +30,8 @@ class PredictedCalendar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     DateTime predictedDate = predictNextPeriodDate(loggedDate);
+    String formattedDate = DateFormat('dd MMMM y').format(predictedDate.toLocal());
+
 
     return Column(
       children: [
@@ -46,7 +49,7 @@ class PredictedCalendar extends StatelessWidget {
         ),
         SizedBox(height: 30),
         Text(
-          "Predicted Period Date: ${predictedDate.toLocal()}",
+          "Predicted Period Date: $formattedDate",
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
       ],

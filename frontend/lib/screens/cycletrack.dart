@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:frontend/screens/chatpy.dart';
 import 'package:frontend/utils/utils.dart';
 import 'dart:convert';
+import 'package:intl/intl.dart';
 
 import '../utils/colors.dart';
 
@@ -39,6 +40,8 @@ class _CyclePredictionScreenState extends State<CyclePredictionScreen> {
 
   @override
   Widget build(BuildContext context) {
+    String formattedDate = DateFormat('dd MMMM y').format(_predictedDate.toLocal());
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -83,7 +86,7 @@ class _CyclePredictionScreenState extends State<CyclePredictionScreen> {
                   child: Row(
                     children: [
                       Text(
-                        "Your Period is likely to start on or around ${_predictedDate.toLocal()}",
+                        "Your Period is likely to start on or around $formattedDate",
                         textScaleFactor: 1.1,
                         style: const TextStyle(
                           color: Color(0xFF090A0A),
@@ -146,7 +149,7 @@ class _CyclePredictionScreenState extends State<CyclePredictionScreen> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => Archive()));
+                                  builder: (context) => LogDates()));
                         },
                       ),
                       SizedBox(width: 8),
@@ -176,11 +179,11 @@ class _CyclePredictionScreenState extends State<CyclePredictionScreen> {
   }
 }
 
-class Archive extends StatelessWidget {
-  const Archive({super.key});
+// class Archive extends StatelessWidget {
+//   const Archive({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold();
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold();
+//   }
+// }
