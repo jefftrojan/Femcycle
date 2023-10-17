@@ -184,7 +184,6 @@ import 'package:cloud_firestore/cloud_firestore.dart'; // Import Firestore
 import '../utils/colors.dart';
 import 'package:intl/intl.dart';
 
-
 class CalendarWidget extends StatefulWidget {
   @override
   _CalendarWidgetState createState() => _CalendarWidgetState();
@@ -246,9 +245,9 @@ class _CalendarWidgetState extends State<CalendarWidget> {
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
         SizedBox(height: 20),
-        Text(
-          "Predicted Period Date: ${_predictedDate.toLocal()}",
-        ),
+        // Text(
+        //   "Predicted Period Date: ${_predictedDate.toLocal()}",
+        // ),
       ],
     );
   }
@@ -265,8 +264,8 @@ class _LogDatesState extends State<LogDates> {
   DateTime _loggedDate = DateTime.now(); // Initialize with the current date
   DateTime _predictedDate = DateTime.now();
 
-  CollectionReference periodsCollection =
-      FirebaseFirestore.instance.collection('PeriodsPrev'); // Firestore collection
+  CollectionReference periodsCollection = FirebaseFirestore.instance
+      .collection('PeriodsPrev'); // Firestore collection
 
   Future<void> _storeLoggedDate(DateTime date) async {
     // Store the logged date in Firestore
@@ -298,10 +297,10 @@ class _LogDatesState extends State<LogDates> {
           ),
         ),
         title: const Align(
-          alignment: Alignment.centerRight,
+          alignment: Alignment.center,
           child: Text(
             "Log Periods",
-            textScaleFactor: 1.5,
+            textScaleFactor: 1.1,
             style: TextStyle(color: Colors.black, fontFamily: 'Inter'),
           ),
         ),
@@ -351,8 +350,8 @@ class _LogDatesState extends State<LogDates> {
               ),
               ListTile(
                 leading: Icon(Icons.timelapse),
-                title:
-                    Text("Cycle length: ${_predictedDate.difference(_loggedDate)}"),
+                title: Text(
+                    "Cycle length: ${_predictedDate.difference(_loggedDate)}"),
               ),
               SizedBox(
                 height: 20,
@@ -371,13 +370,14 @@ class _LogDatesState extends State<LogDates> {
   }
 }
 
-
-
 class LoggedPeriodsList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
-      stream: FirebaseFirestore.instance.collection('PeriodsPrev').orderBy('loggedDate', descending: true).snapshots(),
+      stream: FirebaseFirestore.instance
+          .collection('PeriodsPrev')
+          .orderBy('loggedDate', descending: true)
+          .snapshots(),
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
           return CircularProgressIndicator();
@@ -391,14 +391,16 @@ class LoggedPeriodsList extends StatelessWidget {
             final period = periods[index];
             final loggedDate = period['loggedDate'] as Timestamp;
             final monthInitial = String.fromCharCode(loggedDate.toDate().month);
-            final formattedDate = DateFormat('MMMM yyyy').format(loggedDate.toDate());
+            final formattedDate =
+                DateFormat('MMMM yyyy').format(loggedDate.toDate());
 
             return ListTile(
               leading: CircleAvatar(
                 child: Text(monthInitial, style: TextStyle(fontSize: 18)),
               ),
               title: Text('Period on $formattedDate'),
-              subtitle: Text('Cycle length: ${calculateCycleLength(index, periods)} days'),
+              subtitle: Text(
+                  'Cycle length: ${calculateCycleLength(index, periods)} days'),
             );
           },
         );
@@ -414,7 +416,8 @@ class LoggedPeriodsList extends StatelessWidget {
     final currentLoggedDate = periods[index]['loggedDate'] as Timestamp;
     final previousLoggedDate = periods[index - 1]['loggedDate'] as Timestamp;
 
-    final difference = currentLoggedDate.toDate().difference(previousLoggedDate.toDate());
+    final difference =
+        currentLoggedDate.toDate().difference(previousLoggedDate.toDate());
 
     return difference.inDays;
   }
