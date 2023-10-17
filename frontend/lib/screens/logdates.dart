@@ -89,7 +89,6 @@ class LogDates extends StatefulWidget {
 class _LogDatesState extends State<LogDates> {
   DateTime _loggedDate = DateTime.now(); // Initialize with the current date
   DateTime _predictedDate = DateTime.now();
-   
 
   @override
   Widget build(BuildContext context) {
@@ -111,10 +110,10 @@ class _LogDatesState extends State<LogDates> {
           ),
         ),
         title: const Align(
-          alignment: Alignment.centerRight,
+          alignment: Alignment.center,
           child: Text(
             "Log Periods",
-            textScaleFactor: 1.5,
+            textScaleFactor: 1.0,
             style: TextStyle(color: Colors.black, fontFamily: 'Inter'),
           ),
         ),
@@ -138,14 +137,15 @@ class _LogDatesState extends State<LogDates> {
                 child: Row(
                   children: [
                     Text(
-                      "Your Period is likely to start on or around ${_predictedDate.toLocal()} ",
-                      textScaleFactor: 1.1,
+                      "Your next Period is on or around ${_predictedDate.toLocal()} ",
+                      // textScaleFactor: 1.0,
                       style: const TextStyle(
                         color: Color(0xFF090A0A),
                         fontSize: 14,
                         fontFamily: 'Inter',
                         fontWeight: FontWeight.w600,
                       ),
+                      overflow: TextOverflow.ellipsis,
                     ),
                   ],
                 ),
@@ -162,7 +162,8 @@ class _LogDatesState extends State<LogDates> {
               ),
               ListTile(
                 leading: Icon(Icons.timelapse),
-                title: Text("Cycle length: ${_predictedDate.difference(_loggedDate)}"),
+                title: Text(
+                    "Cycle length: ${_predictedDate.difference(_loggedDate)}"),
               ),
               SizedBox(
                 height: 20,

@@ -13,8 +13,12 @@ class _StoresState extends State<Stores> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: primary,
-        title: const Text("Store Locator"),
+        iconTheme: IconThemeData(color: Colors.black),
+        backgroundColor: Colors.white,
+        title: const Text(
+          "Store Locator",
+          style: TextStyle(color: Colors.black),
+        ),
       ),
       body: content(),
     );
@@ -31,12 +35,12 @@ class _StoresState extends State<Stores> {
             color: Colors.grey[200],
             borderRadius: BorderRadius.circular(30.0),
           ),
-          child: TextField(
+          child: const TextField(
             decoration: InputDecoration(
-              hintText: "Enter your location",
-              icon: Icon(Icons.search),
-              border: InputBorder.none,
-            ),
+                hintText: "Enter your location",
+                icon: Icon(Icons.search),
+                border: InputBorder.none,
+                fillColor: primarylight),
           ),
         ),
         // Transportation Options
@@ -73,7 +77,6 @@ class _StoresState extends State<Stores> {
         Expanded(
           child: ListView(
             children: [
-              
               StoreCard("Store 1"),
               StoreCard("Store 2"),
               StoreCard("Store 3"),
