@@ -246,9 +246,9 @@ class _CalendarWidgetState extends State<CalendarWidget> {
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
         SizedBox(height: 20),
-        Text(
-          "Predicted Period Date: ${_predictedDate.toLocal()}",
-        ),
+        // Text(
+        //   "Predicted Period Date: ${_predictedDate.toLocal()}",
+        // ),
       ],
     );
   }
@@ -280,6 +280,8 @@ class _LogDatesState extends State<LogDates> {
 
   @override
   Widget build(BuildContext context) {
+  String formattedDate = DateFormat('dd MMMM y').format(_predictedDate.toLocal());
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -326,7 +328,7 @@ class _LogDatesState extends State<LogDates> {
                   children: [
                     Flexible(
                       child: Text(
-                        "Your Period is likely to start on or around ${_predictedDate.toLocal()} ",
+                        "Your Period is likely to start on or around $formattedDate ",
                         textScaleFactor: 1.1,
                         style: const TextStyle(
                           color: Color(0xFF090A0A),
@@ -344,7 +346,7 @@ class _LogDatesState extends State<LogDates> {
               ),
               ListTile(
                 leading: Icon(Icons.punch_clock),
-                title: Text("Period Started on $_predictedDate"),
+                title: Text("Period Started on $formattedDate"),
               ),
               SizedBox(
                 height: 20,
