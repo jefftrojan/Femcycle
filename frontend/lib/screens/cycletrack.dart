@@ -40,7 +40,8 @@ class _CyclePredictionScreenState extends State<CyclePredictionScreen> {
 
   @override
   Widget build(BuildContext context) {
-    String formattedDate = DateFormat('dd MMMM y').format(_predictedDate.toLocal());
+    String formattedDate =
+        DateFormat('dd MMMM y').format(_predictedDate.toLocal());
 
     return Scaffold(
       appBar: AppBar(
@@ -121,55 +122,58 @@ class _CyclePredictionScreenState extends State<CyclePredictionScreen> {
                   ],
                 ),
                 const SizedBox(height: 30),
-                Center(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      ElevatedButton(
-                        child: Text("Log Period"),
-                        style: ElevatedButton.styleFrom(
-                          primary: accentchatalt,
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 20, vertical: 10),
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Center(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        ElevatedButton(
+                          child: Text("Log Period"),
+                          style: ElevatedButton.styleFrom(
+                            primary: accentchatalt,
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 20, vertical: 10),
+                          ),
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => LogDates()));
+                          },
                         ),
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => LogDates()));
-                        },
-                      ),
-                      SizedBox(width: 8),
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          primary: accentchatalt,
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 20, vertical: 10),
+                        SizedBox(width: 8),
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            primary: accentchatalt,
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 20, vertical: 10),
+                          ),
+                          child: Text("Previous Periods"),
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => LogDates()));
+                          },
                         ),
-                        child: Text("Previous Periods"),
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => LogDates()));
-                        },
-                      ),
-                      SizedBox(width: 8),
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          primary: accentchatalt,
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 20, vertical: 10),
+                        SizedBox(width: 8),
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            primary: accentchatalt,
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 20, vertical: 10),
+                          ),
+                          child: Text("Access Chat"),
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => ChatScreen()));
+                          },
                         ),
-                        child: Text("Access Chat"),
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => ChatScreen()));
-                        },
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ],
