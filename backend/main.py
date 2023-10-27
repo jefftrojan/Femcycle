@@ -1,34 +1,48 @@
 import pickle
-from flask import Flask, request, jsonify
-from flask_cors import CORS
-import joblib
+import pandas as pd
+from flask import Flask, render_template, request, jsonify
+
+# Load the SVR model
+with open('svr_model.pkl', 'rb') as model_file:
+    model = pickle.load(model_file)
 
 app = Flask(__name__)
 
-CORS(app)
-#load model
-# model = joblib.load("mlmodel.pickle")
-with open("mlmodel.pickle", "rb") as model_file:
-    model = pickle.load(model_file)
+@app.route('/')
+def index():
+    # Render the HTML template
+    return render_template('predict_periods.html')
 
-@app.route("/", methods=["GET"])
-
-@app.route("/predict", methods=["POST"])
+@app.route('/predict', methods=['POST'])
 def predict():
     try:
+        # Get data from the JSON request
         data = request.get_json()
-        logged_date = data.get('LoggedDate')
 
-        
-        prediction = model.predict(logged_date)
+        # Check if the 'Dates' key exists in the JSON data
+        if 'Dates' in data:
+            dates = data['Dates']
+        else:
+            return jsonify({'error': 'Missing "Dates" in the request data'}), 400
 
-        prediction = logged_date
+        # Ensure that 'Dates' is a list (you may need to adapt this part depending on your input)
+        if not isinstance(dates, list):
+            return jsonify({'error': 'Dates must be a list'}), 400
 
-        return jsonify({"prediction": prediction})
+        # Make predictions using the loaded model
+        predictions = model.predict(pd.DataFrame({'Dates': dates}))
+
+        # Convert numeric predictions to date format
+        formatted_predictions = [pd.to_datetime('2023-01-01') + pd.DateOffset(days=int(prediction)) for prediction in predictions]
+
+        # Return the formatted predictions as a list of date strings
+        formatted_predictions_str = [prediction.strftime('%Y-%m-%d') for prediction in formatted_predictions]
+
+        # Return the predictions as JSON
+        return jsonify({'predictions': formatted_predictions_str}), 200
+
     except Exception as e:
-        return jsonify({"error": str(e)}), 500
+        return jsonify({'error': str(e)}), 500
 
-
-
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port= 5000)
+if __name__ == '__main__':
+    app.run(debug=True)

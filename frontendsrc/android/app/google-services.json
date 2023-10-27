@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "1000888321888",
+    "project_id": "femnet-3e68f",
+    "storage_bucket": "femnet-3e68f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1000888321888:android:0cde0586d59458ceb50005",
+        "android_client_info": {
+          "package_name": "com.example.frontendsrc"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1000888321888-m9oebts5sfht8b8kgtjdo5simqjuj5c1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBOQxSS_07FLSUHnI7Fb5_c58gWS0yXLts"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1000888321888-m9oebts5sfht8b8kgtjdo5simqjuj5c1.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1000888321888-4u59q0u8kc8v0ctcha1ec1s3gjc12olo.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.frontendsrc"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
