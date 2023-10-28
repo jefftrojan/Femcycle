@@ -264,20 +264,20 @@ class _PeriodsViewState extends State<PeriodsView> {
                       child: Center(
                         child: Column(
                           children: [
-                            SizedBox(height: 10,),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
+                            const SizedBox(height: 50,),
+                            const Padding(
+                              padding: EdgeInsets.all(8.0),
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(
-                                    "What Would You like To Do",
+                                    "What Would You like To Do?",
                                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                                   ),
                                 ],
                               ),
                             ),
-                            // SizedBox(height: 30,),
+                            const SizedBox(height: 30,),
                             Center(child: HorizontalTiles())
                           ],
                         ),
