@@ -1,5 +1,5 @@
 import '../model/cycletrack.model.dart';
-import '../view/periodsmain.view.dart';
+import '../periodsmain.view.dart';
 
 class CycleTrackController {
   final CycleTrackModel model;
@@ -24,3 +24,4 @@ class PeriodsController {
 
   // Define methods to handle logic related to Periodsmain
 }
+

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:frontendsrc/brandkit/colors.dart';
-import 'package:frontendsrc/screens/chat.dart';
-import 'package:frontendsrc/screens/cycletracker.dart';
-import 'package:frontendsrc/screens/locator.dart';
+import 'package:frontendsrc/assets/screens/chat.dart';
+import 'package:frontendsrc/assets/screens/cycletracker.dart';
+import 'package:frontendsrc/assets/screens/locator.dart';
 class TopBarFb2 extends StatelessWidget {
   final String title;
   final String upperTitle;

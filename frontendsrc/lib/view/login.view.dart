@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontendsrc/brandkit/colors.dart';
-import 'package:frontendsrc/src/controllers/login.control.dart';
+// import 'package:frontendsrc/controllers/login.control.dart';
 
 import '../model/login_register.model.dart';
 class LoginView extends StatelessWidget {

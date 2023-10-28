@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:chat_bubbles/bubbles/bubble_normal.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-import '../brandkit/colors.dart';
+import '../../brandkit/colors.dart';
 
 class ChatScreen extends StatefulWidget {
   const ChatScreen({Key? key});

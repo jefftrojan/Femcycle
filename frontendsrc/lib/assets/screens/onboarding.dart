@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:frontendsrc/screens/signin.dart';
+import 'package:frontendsrc/assets/screens/signin.dart';
 
 // models
 class OnboardingContents {

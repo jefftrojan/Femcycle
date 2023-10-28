@@ -5,6 +5,8 @@ class LoginRegisterModel {
   String password = '';
   String? emailError;
   String? passwordError;
+  String? confirmPassword; // Add confirmPassword field
+
 
   void resetErrorText() {
     emailError = null;

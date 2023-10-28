@@ -1,17 +1,39 @@
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 
-import '../../brandkit/colors.dart';
-import '../../brandkit/textstylealt.dart';
-import '../../brandkit/utils.dart';
-import '../model/cycletrack.model.dart';
+import 'brandkit/colors.dart';
+import 'brandkit/textstylealt.dart';
+import 'brandkit/utils.dart';
+import 'model/cycletrack.model.dart';
 
 class CycleTrackView {
   final CycleTrackModel model;
 
   CycleTrackView(this.model);
+   DateTime get firstDayOfWeek {
+    final today = model.today; // Current date
+    final int dayOfWeek = today.weekday; // Get the day of the week (1 - 7, where 1 is Monday)
+    final DateTime firstDay = today.subtract(Duration(days: dayOfWeek - 1));
+    return firstDay;
+  }
+
+  DateTime get lastDayOfWeek {
+    final firstDay = firstDayOfWeek;
+    final DateTime lastDay = firstDay.add(Duration(days: 6)); // Assuming a week has 7 days
+    return lastDay;
+  }
+
+  void _onDaySelected(DateTime selectedDate, DateTime focusedDate) {
+  // Handle the day selection logic here
+
+    // print('Selected Date: $selectedDate');
+    // print('Focused Date: $focusedDate');
+  }
 
   Widget build(BuildContext context) {
+    String currentUsername = model.currentUsername; // Define currentUsername
+    DateTime today = model.today; // Define today
+
     return Scaffold(
       extendBody: true,
       body: SingleChildScrollView(
@@ -173,12 +195,50 @@ class CycleTrackView {
   }
 }
 
-class PeriodsView {
+class PeriodsView extends StatefulWidget{
   final PeriodsModel model;
 
   PeriodsView(this.model);
+  //   DateTime get firstDayOfWeek {
+  //   final today = model.today; // Current date
+  //   final int dayOfWeek = today.weekday; // Get the day of the week (1 - 7, where 1 is Monday)
+  //   final DateTime firstDay = today.subtract(Duration(days: dayOfWeek - 1));
+  //   return firstDay;
+  // }
+
+  // DateTime get lastDayOfWeek {
+  //   final firstDay = firstDayOfWeek;
+  //   final DateTime lastDay = firstDay.add(Duration(days: 6)); // Assuming a week has 7 days
+  //   return lastDay;
+  // }
+    @override
+  _PeriodsViewState createState() => _PeriodsViewState();
+
+}
+
+class _PeriodsViewState extends State<PeriodsView> {
+  final PeriodsModel model;
+
+
+  // PeriodsView(this.model);
+    DateTime get firstDayOfWeek {
+    final today = model.today; // Current date
+    final int dayOfWeek = today.weekday; // Get the day of the week (1 - 7, where 1 is Monday)
+    final DateTime firstDay = today.subtract(Duration(days: dayOfWeek - 1));
+    return firstDay;
+  }
+
+  DateTime get lastDayOfWeek {
+    final firstDay = firstDayOfWeek;
+    final DateTime lastDay = firstDay.add(Duration(days: 6)); // Assuming a week has 7 days
+    return lastDay;
+  }
 
   Widget build(BuildContext context) {
+    String currentUsername = model.currentUsername; // Define currentUsername
+    DateTime today = model.today; // Define today
+
+    
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -278,7 +338,9 @@ class PeriodsView {
             
           ),
         ),
-      ),
+      
     );
   }
+  
+ 
 }

@@ -1,5 +1,5 @@
-import 'package:frontendsrc/src/model/login_register.model.dart' as modelPrefix;
-import 'package:frontendsrc/src/view/login.view.dart';
+import 'package:frontendsrc/model/login_register.model.dart' as modelPrefix;
+import 'package:frontendsrc/view/login.view.dart';
 
 class LoginController {
   final modelPrefix.LoginRegisterModel model;
