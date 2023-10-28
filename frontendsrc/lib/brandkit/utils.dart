@@ -177,7 +177,6 @@ class IconBottomBar2 extends StatelessWidget {
   }
 }
 
-// horizontal tiles
 class HorizontalTiles extends StatefulWidget {
   @override
   _HorizontalTilesState createState() => _HorizontalTilesState();
@@ -199,11 +198,13 @@ class _HorizontalTilesState extends State<HorizontalTiles> {
     return Column(
       children: [
         Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             for (int i = 0; i < 2; i++) buildTile(i),
           ],
         ),
         Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             for (int i = 2; i < 4; i++) buildTile(i),
           ],
@@ -221,26 +222,24 @@ class _HorizontalTilesState extends State<HorizontalTiles> {
           activeTile = index;
         });
       },
-      child: Center(
-        child: Container(
-          width: 120, // Set the desired width
-          height: 100, // Set the desired height
-          margin: EdgeInsets.all(8),
-          padding: EdgeInsets.all(8),
-          decoration: BoxDecoration(
-            color: isActive ? primary : Colors.grey,
-            borderRadius: BorderRadius.circular(8),
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center, // Center the content
-            children: [
-              Icon(tiles[index]['icon'], size: 48, color: Colors.white),
-              Text(
-                tiles[index]['text'],
-                style: TextStyle(color: Colors.white),
-              ),
-            ],
-          ),
+      child: Container(
+        width: 140, // Set the desired width
+        height: 120, // Set the desired height
+        margin: const EdgeInsets.all(8), // Set equal horizontal margin
+        padding: const EdgeInsets.symmetric(horizontal: 8), // Set equal horizontal padding
+        decoration: BoxDecoration(
+          color: isActive ? primary : Colors.grey,
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center, // Center the content
+          children: [
+            Icon(tiles[index]['icon'], size: 48, color: Colors.white),
+            Text(
+              tiles[index]['text'],
+              style: const TextStyle(color: Colors.white),
+            ),
+          ],
         ),
       ),
     );
