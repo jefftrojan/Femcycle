@@ -2,16 +2,19 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:frontendsrc/brandkit/colors.dart';
+import 'package:frontendsrc/firebase_options.dart';
 import 'package:get/get.dart';
-import 'controllers/cycletrack.controller.dart'; // Import your controllers and models
+import 'controllers/cycletrack.controller.dart';
 import 'periodsmain.view.dart';
 import 'model/cycletrack.model.dart';
 import 'assets/screens/splash.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // Initialize Firebase before running the app
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+
+  ); // Initialize Firebase
   runApp(const MyApp());
 }
 
@@ -24,13 +27,29 @@ class MyApp extends StatelessWidget {
     String currentUsername = user != null ? user.displayName ?? 'Guest' : 'Guest';
 
     // Create an instance of CycleTrackModel
-    CycleTrackModel cycleTrackModel =
-        CycleTrackModel(currentUsername: currentUsername, today: DateTime.now());
+    CycleTrackModel cycleTrackModel = CycleTrackModel(
+      currentUsername: currentUsername,
+      today: DateTime.now(),
+    );
 
-    // Now create an instance of CycleTrackController and provide the model
+    // Create an instance of PeriodsModel with default values
+    PeriodsModel periodsModel = PeriodsModel(
+      currentUsername: currentUsername,
+      today: DateTime.now(),
+      firstDayOfWeek: DateTime.now(), // Set the default value
+      lastDayOfWeek: DateTime.now(),  // Set the default value
+    );
+
+    // Create an instance of CycleTrackController and provide the model
     CycleTrackController cycleTrackController = CycleTrackController(
       model: cycleTrackModel,
-      view: CycleTrackView(cycleTrackModel), // Pass the model as an argument
+      view: CycleTrackView(cycleTrackModel),
+    );
+
+    // Create an instance of PeriodsController and provide the model
+    PeriodsController periodsController = PeriodsController(
+      model: periodsModel,
+      view: PeriodsView(periodsModel),
     );
 
     return GetMaterialApp(

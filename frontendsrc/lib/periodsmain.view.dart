@@ -10,40 +10,37 @@ class CycleTrackView {
   final CycleTrackModel model;
 
   CycleTrackView(this.model);
-   DateTime get firstDayOfWeek {
-    final today = model.today; // Current date
-    final int dayOfWeek = today.weekday; // Get the day of the week (1 - 7, where 1 is Monday)
+
+  DateTime get firstDayOfWeek {
+    final today = model.today;
+    final int dayOfWeek = today.weekday;
     final DateTime firstDay = today.subtract(Duration(days: dayOfWeek - 1));
     return firstDay;
   }
 
   DateTime get lastDayOfWeek {
     final firstDay = firstDayOfWeek;
-    final DateTime lastDay = firstDay.add(Duration(days: 6)); // Assuming a week has 7 days
+    final DateTime lastDay = firstDay.add(Duration(days: 6));
     return lastDay;
   }
 
   void _onDaySelected(DateTime selectedDate, DateTime focusedDate) {
-  // Handle the day selection logic here
-
-    // print('Selected Date: $selectedDate');
-    // print('Focused Date: $focusedDate');
+    // Handle the day selection logic here
   }
 
   Widget build(BuildContext context) {
-    String currentUsername = model.currentUsername; // Define currentUsername
-    DateTime today = model.today; // Define today
+    String currentUsername = model.currentUsername;
+    DateTime today = model.today;
 
     return Scaffold(
       extendBody: true,
       body: SingleChildScrollView(
         child: Container(
-               decoration: BoxDecoration(
+          decoration: BoxDecoration(
             gradient: LinearGradient(
               colors: [
                 Color(0xffffffff),
                 Color(0xffd1bed5),
-                // Color(0xffcfb4cf),
               ],
               stops: [0.25, 0.75],
               begin: Alignment.topCenter,
@@ -55,7 +52,7 @@ class CycleTrackView {
               TopBarFb2(
                 title: 'Welcome back',
                 upperTitle: 'Your Upper Title',
-                currentUsername: currentUsername, // Pass the current username
+                currentUsername: currentUsername,
               ),
               SizedBox(height: 10,),
               Container(
@@ -82,26 +79,20 @@ class CycleTrackView {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  color:Color(0xffd1bed5),
-
+                  color: Color(0xffd1bed5),
                   child: Center(
                     child: ListTile(
                       subtitle: Text(
                         'Your period is predicted to come on or around ...',
                         style: TextStyle(
-                          // fontFamily: SubtitleStyle.fontFamily,
                           fontSize: 14,
-                          // fontWeight: FontWeight.w600,
-                          color: black
+                          color: black,
                         ),
                       ),
                     ),
                   ),
                 ),
               ),
-
-     
-
               SizedBox(height: 20,),
               Padding(
                 padding: const EdgeInsets.all(16.0),
@@ -126,23 +117,17 @@ class CycleTrackView {
                       Card(
                         elevation: 8,
                         color: Color(0xffd1bed5),
-                         shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
                         child: Container(
                           color: Color(0xffd1bed5),
                           child: ListTile(
                             title: Text(
                               'Started on:',
-                              style: TextStyle(
-                                // fontSize: SubtitleStyle.fontSize,
-                                // fontFamily: SubtitleStyle.fontFamily,
-                                // fontWeight: FontWeight.w400,
-                              ),
+                              style: TextStyle(),
                             ),
-                            // subtitle: Text('This is the first list tile.'),
-                            leading: Icon(Icons.timelapse_rounded, color:Colors.white),
+                            leading: Icon(Icons.timelapse_rounded, color: Colors.white),
                             tileColor: Colors.white,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10.0),
@@ -155,29 +140,21 @@ class CycleTrackView {
                       Card(
                         elevation: 8,
                         color: Color(0xffd1bed5),
-                         shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
                         child: Container(
-                          color:Color(0xffd1bed5) ,
-                          
+                          color: Color(0xffd1bed5),
                           child: ListTile(
                             title: Text(
                               'Cycle Length:',
-                              style: TextStyle(
-                                // fontSize: SubtitleStyle.fontSize,
-                                // fontFamily: SubtitleStyle.fontFamily,
-                                // fontWeight: FontWeight.w400,
-                              ),
+                              style: TextStyle(),
                             ),
-                            // subtitle: Text('This is the first list tile.'),
-                            leading: Icon(Icons.timelapse_rounded, color: Colors.white,),
+                            leading: Icon(Icons.timelapse_rounded, color: Colors.white),
                             tileColor: Colors.white,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10.0),
                             ),
-                            
                             contentPadding: EdgeInsets.symmetric(horizontal: 20.0),
                           ),
                         ),
@@ -195,66 +172,50 @@ class CycleTrackView {
   }
 }
 
-class PeriodsView extends StatefulWidget{
+class PeriodsView extends StatefulWidget {
   final PeriodsModel model;
 
   PeriodsView(this.model);
-  //   DateTime get firstDayOfWeek {
-  //   final today = model.today; // Current date
-  //   final int dayOfWeek = today.weekday; // Get the day of the week (1 - 7, where 1 is Monday)
-  //   final DateTime firstDay = today.subtract(Duration(days: dayOfWeek - 1));
-  //   return firstDay;
-  // }
 
-  // DateTime get lastDayOfWeek {
-  //   final firstDay = firstDayOfWeek;
-  //   final DateTime lastDay = firstDay.add(Duration(days: 6)); // Assuming a week has 7 days
-  //   return lastDay;
-  // }
-    @override
+  @override
   _PeriodsViewState createState() => _PeriodsViewState();
-
 }
 
 class _PeriodsViewState extends State<PeriodsView> {
-  final PeriodsModel model;
+  late DateTime firstDayOfWeek;
+  late DateTime lastDayOfWeek;
 
-
-  // PeriodsView(this.model);
-    DateTime get firstDayOfWeek {
-    final today = model.today; // Current date
-    final int dayOfWeek = today.weekday; // Get the day of the week (1 - 7, where 1 is Monday)
-    final DateTime firstDay = today.subtract(Duration(days: dayOfWeek - 1));
-    return firstDay;
+  @override
+  void initState() {
+    super.initState();
+    calculateWeekBoundaries(); // Initialize week boundaries
   }
 
-  DateTime get lastDayOfWeek {
-    final firstDay = firstDayOfWeek;
-    final DateTime lastDay = firstDay.add(Duration(days: 6)); // Assuming a week has 7 days
-    return lastDay;
+  void calculateWeekBoundaries() {
+    final today = widget.model.today;
+    final int dayOfWeek = today.weekday;
+    firstDayOfWeek = today.subtract(Duration(days: dayOfWeek - 1));
+    lastDayOfWeek = firstDayOfWeek.add(Duration(days: 6));
   }
 
+  @override
   Widget build(BuildContext context) {
-    String currentUsername = model.currentUsername; // Define currentUsername
-    DateTime today = model.today; // Define today
+    String currentUsername = widget.model.currentUsername;
+    DateTime today = widget.model.today;
 
-    
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
           child: Container(
-             color:Color.fromARGB(97, 209, 190, 213) ,
-
+            color: Color.fromARGB(97, 209, 190, 213),
             child: Column(
-          
               children: [
                 TopBarFb2(
-                    title: 'Welcome back',
-                    upperTitle: 'Your Upper Title',
-                    currentUsername: currentUsername, // Pass the current username
-                  ),
-                  SizedBox(height: 15,),
-                  
+                  title: 'Welcome back',
+                  upperTitle: 'Your Upper Title',
+                  currentUsername: currentUsername,
+                ),
+                SizedBox(height: 15,),
                 TableCalendar(
                   focusedDay: today,
                   firstDay: firstDayOfWeek,
@@ -263,38 +224,31 @@ class _PeriodsViewState extends State<PeriodsView> {
                   availableCalendarFormats: const {
                     CalendarFormat.week: 'Week',
                   },
-                  headerStyle: HeaderStyle(
-                    formatButtonVisible: true,
-                  ),
-                  daysOfWeekHeight: 0, // Hide days of the week
-                  availableGestures: AvailableGestures.none, // Disable swipe gestures
+                  headerStyle: HeaderStyle(formatButtonVisible: true),
+                  daysOfWeekHeight: 0,
+                  availableGestures: AvailableGestures.none,
                   onPageChanged: (focusedDay) {
-                    // Prevent calendar from changing month
                     if (focusedDay.isBefore(firstDayOfWeek) ||
                         focusedDay.isAfter(lastDayOfWeek)) {
-                      setState(() {
-                        today = firstDayOfWeek;
-                      });
+                      calculateWeekBoundaries(); // Recalculate week boundaries
                     }
                   },
-                  
                 ),
                 SizedBox(height: 15,),
                 Card(
                   elevation: 8.0,
-                  color:  Color.fromARGB(255, 213, 206, 214),
-
+                  color: Color.fromARGB(255, 213, 206, 214),
                   child: Container(
-                  padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
-                  height: 50,
-                  width: 350,
-                  child:  Column(
-                    children: [
-                      Center(child: Text("Your period is likely to start on or around September 10th"))
-                    ],            
+                    padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
+                    height: 50,
+                    width: 350,
+                    child: Column(
+                      children: [
+                        Center(child: Text("Your period is likely to start on or around September 10th"))
+                      ],
+                    ),
                   ),
-
-                ),),
+                ),
                 SizedBox(height: 30,),
                 Padding(
                   padding: const EdgeInsets.all(0.0),
@@ -330,17 +284,11 @@ class _PeriodsViewState extends State<PeriodsView> {
                     ),
                   ),
                 )
-
-                
               ],
             ),
           ),
-            
-          ),
         ),
-      
+      ),
     );
   }
-  
- 
 }
