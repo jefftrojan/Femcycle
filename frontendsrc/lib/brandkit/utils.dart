@@ -3,6 +3,10 @@ import 'package:frontendsrc/brandkit/colors.dart';
 import 'package:frontendsrc/assets/screens/chat.dart';
 import 'package:frontendsrc/assets/screens/cycletracker.dart';
 import 'package:frontendsrc/assets/screens/locator.dart';
+import 'package:frontendsrc/model/cycletrack.model.dart';
+import 'package:frontendsrc/periodsmain.view.dart';
+import 'package:get/get.dart';
+
 class TopBarFb2 extends StatelessWidget {
   final String title;
   final String upperTitle;
@@ -44,7 +48,6 @@ class TopBarFb2 extends StatelessWidget {
                       fontWeight: FontWeight.bold),
                 ),
                 alignment: Alignment.centerLeft,
-                
               ),
             ),
           ],
@@ -85,19 +88,25 @@ class BottomNavBarFb3 extends StatelessWidget {
               Spacer(),
               IconBottomBar(
                   text: "Chat",
-                  icon: Icons.search_outlined,
+                  icon: Icons.chat_bubble,
                   selected: false,
-                  onPressed: () {}),
+                  onPressed: () {
+                    Get.off(ChatScreen());
+                  }),
               IconBottomBar(
-                  text: "",
-                  icon: Icons.local_grocery_store_outlined,
-                  selected: false,
-                  onPressed: () {}),
-              IconBottomBar(
-                  text: "Calendar",
+                  text: "Periods",
                   icon: Icons.date_range_outlined,
                   selected: false,
-                  onPressed: () {})
+                  onPressed: () {
+                    // Get.off(CycleTrackView());
+                  }),
+              IconBottomBar(
+                  text: "Locator",
+                  icon: Icons.location_pin,
+                  selected: false,
+                  onPressed: () {
+                    // Get.off()
+                  })
             ],
           ),
         ),
@@ -191,14 +200,12 @@ class _HorizontalTilesState extends State<HorizontalTiles> {
       children: [
         Row(
           children: [
-            for (int i = 0; i < 2; i++)
-              buildTile(i),
+            for (int i = 0; i < 2; i++) buildTile(i),
           ],
         ),
         Row(
           children: [
-            for (int i = 2; i < 4; i++)
-              buildTile(i),
+            for (int i = 2; i < 4; i++) buildTile(i),
           ],
         ),
       ],
