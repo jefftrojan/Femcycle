@@ -1,28 +1,35 @@
+import 'dart:async';
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
+import 'package:http/http.dart' as http;
 
-class NearbyHospitalsScreen extends StatefulWidget {
+class MapSample extends StatefulWidget {
+  const MapSample({super.key});
+
   @override
-  _NearbyHospitalsScreenState createState() => _NearbyHospitalsScreenState();
+  State<MapSample> createState() => MapSampleState();
 }
 
-class _NearbyHospitalsScreenState extends State<NearbyHospitalsScreen> {
-  late GoogleMapController _mapController;
-  late Location _location;
+class MapSampleState extends State<MapSample> {
+  final Completer<GoogleMapController> _controller =
+      Completer<GoogleMapController>();
+
+  final Location _location = Location();
   LocationData? _currentLocation;
   Set<Marker> _markers = {};
+
+  static const CameraPosition _kGooglePlex = CameraPosition(
+    target: LatLng(37.42796133580664, -122.085749655962),
+    zoom: 14.4746,
+  );
 
   @override
   void initState() {
     super.initState();
-    _location = Location();
-  }
-
-  @override
-  void dispose() {
-    _mapController.dispose();
-    super.dispose();
+    _getCurrentLocation();
   }
 
   Future<void> _getCurrentLocation() async {
@@ -39,17 +46,18 @@ class _NearbyHospitalsScreenState extends State<NearbyHospitalsScreen> {
   }
 
   Future<void> _moveCameraToLocation(double latitude, double longitude) async {
-    final cameraPosition = CameraPosition(
-      target: LatLng(latitude, longitude),
-      zoom: 15,
-    );
-    _mapController
-        .animateCamera(CameraUpdate.newCameraPosition(cameraPosition));
+    final GoogleMapController controller = await _controller.future;
+    await controller.animateCamera(CameraUpdate.newCameraPosition(
+      CameraPosition(
+        target: LatLng(latitude, longitude),
+        zoom: 15,
+      ),
+    ));
   }
 
   Future<void> _getNearbyHospitals(double latitude, double longitude) async {
-    // Make API call to get nearby hospitals using latitude and longitude
-    // Here, we are just adding some sample markers to show how it works
+    // Replace this with your logic to fetch nearby hospitals
+    // Sample code to add some markers (you should fetch real hospital data)
     final markers = {
       Marker(
         markerId: MarkerId('1'),
@@ -72,38 +80,53 @@ class _NearbyHospitalsScreenState extends State<NearbyHospitalsScreen> {
     });
   }
 
+  Future<void> _getDirections(double destinationLatitude, double destinationLongitude) async {
+    if (_currentLocation != null) {
+      final String apiKey = "AIzaSyAj38FoUFL1SJD--adxoOlXN6re9zZptec";
+      final String origin = '${_currentLocation!.latitude},${_currentLocation!.longitude}';
+      final String destination = '$destinationLatitude,$destinationLongitude';
+
+      final Uri uri = Uri.https(
+        'maps.googleapis.com',
+        '/maps/api/directions/json',
+        <String, String>{
+          'origin': origin,
+          'destination': destination,
+          'key': apiKey,
+        },
+      );
+
+      final response = await http.get(uri);
+
+      if (response.statusCode == 200) {
+        final directions = jsonDecode(response.body);
+        // Process the directions data and update the map accordingly
+      } else {
+        print('Failed to fetch directions: ${response.statusCode}');
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Nearby Hospitals'),
+      body: GoogleMap(
+        mapType: MapType.normal,
+        initialCameraPosition: _kGooglePlex,
+        onMapCreated: (GoogleMapController controller) {
+          _controller.complete(controller);
+        },
+        markers: _markers,
+        onTap: (LatLng position) {
+          // Handle map tap events, e.g., show hospital info or directions
+        },
       ),
-      body: Stack(
-        children: [
-          GoogleMap(
-            onMapCreated: (GoogleMapController controller) {
-              _mapController = controller;
-              _getCurrentLocation();
-            },
-            initialCameraPosition: CameraPosition(
-              target: LatLng(37.77483, -122.41942),
-              zoom: 15,
-            ),
-            mapType: MapType.normal, // Add your desired map type here
-            markers: _markers,
-          ),
-          Positioned(
-            top: 16,
-            left: 16,
-            child: FloatingActionButton(
-              onPressed: () {
-                _getCurrentLocation();
-              },
-              child: Icon(Icons.my_location),
-            ),
-          ),
-        ],
-      ),
+      // floatingActionButton: FloatingActionButton.extended(
+      //   onPressed: _getCurrentLocation,
+      //   label: const Text('Find Hospitals Nearby'),
+      //   icon: const Icon(Icons.local_hospital),
+      // ),
+      
     );
   }
 }

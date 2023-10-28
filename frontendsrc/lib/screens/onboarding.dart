@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontendsrc/screens/signin.dart';
 
 // models
 class OnboardingContents {
@@ -166,7 +167,15 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       ? Padding(
                           padding: const EdgeInsets.all(10),
                           child: ElevatedButton(
-                            onPressed: () {},
+                            onPressed: () {
+                                          Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return SimpleRegisterScreen(); // Replace SignUpScreen with your actual signup screen.
+                    },
+                  ),
+                );
+                            },
                             child: const Text("Get Started"),
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.black,
@@ -190,6 +199,13 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             children: [
                               TextButton(
                                 onPressed: () {
+                                  Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (context) {
+                                      return SimpleRegisterScreen(); // Replace SignUpScreen with your actual signup screen.
+                                    },
+                                  ),
+                                );
                                   _controller.jumpToPage(2);
                                 },
                                 child: const Text(
@@ -206,6 +222,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                               ),
                               ElevatedButton(
                                 onPressed: () {
+                                  
                                   _controller.nextPage(
                                     duration: const Duration(milliseconds: 200),
                                     curve: Curves.easeIn,

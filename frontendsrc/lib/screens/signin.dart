@@ -74,6 +74,7 @@ class _SimpleLoginScreenState extends State<SimpleLoginScreen> {
         padding: const EdgeInsets.symmetric(horizontal: 16),
         child: ListView(
           children: [
+  
             SizedBox(height: screenHeight * .12),
               const Text(
               'Fem.Cycle',
@@ -341,6 +342,8 @@ class _SimpleRegisterScreenState extends State<SimpleRegisterScreen> {
                 ),
               ),
             )
+
+            
           ],
         ),
       ),

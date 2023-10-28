@@ -96,7 +96,7 @@ class _ChatScreenState extends State<ChatScreen> {
   }
 
   bool isRelevantQuery(String text) {
-    final relevantKeywords = ["menstruation", "reproductive health", "period", "ovulation"];
+    final relevantKeywords = ["menstruation", "reproductive health", "period", "ovulation", "feminine", "girl child", "puberty", "sex", "fibroids", "gynaecology"];
 
     for (final keyword in relevantKeywords) {
       if (text.toLowerCase().contains(keyword)) {

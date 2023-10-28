@@ -1,54 +1,22 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:frontendsrc/brandkit/colors.dart';
-import 'package:frontendsrc/brandkit/textstylealt.dart';
-import 'package:frontendsrc/brandkit/utils.dart';
 import 'package:table_calendar/table_calendar.dart';
 
+import '../../brandkit/colors.dart';
+import '../../brandkit/textstylealt.dart';
+import '../../brandkit/utils.dart';
+import '../model/cycletrack.model.dart';
 
-// log periods
-class CycleTrackmain extends StatefulWidget {
-  const CycleTrackmain({Key? key}) : super(key: key);
+class CycleTrackView {
+  final CycleTrackModel model;
 
-  @override
-  State<CycleTrackmain> createState() => _CycleTrackmainState();
-}
+  CycleTrackView(this.model);
 
-class _CycleTrackmainState extends State<CycleTrackmain> {
-  String currentUsername = '';
-int daysToAdd = 30;
-
-  @override
-  void initState() {
-    super.initState();
-    // Initialize currentUsername with the user's display name
-    fetchCurrentUsername();
-  }
-
-  Future<void> fetchCurrentUsername() async {
-    final user = FirebaseAuth.instance.currentUser;
-    if (user != null) {
-      setState(() {
-        currentUsername = user.displayName ?? ''; // Display name or an empty string if not available
-      });
-    }
-  }
-
-  DateTime today = DateTime.now();
-  void _onDaySelected(DateTime day, DateTime focusedDay) {
-    setState(() {
-      today = day;
-    });
-  }
-  
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       extendBody: true,
       body: SingleChildScrollView(
         child: Container(
-          decoration: BoxDecoration(
+               decoration: BoxDecoration(
             gradient: LinearGradient(
               colors: [
                 Color(0xffffffff),
@@ -201,52 +169,21 @@ int daysToAdd = 30;
           ),
         ),
       ),
-      // bottomNavigationBar: (),
-      // bottomNavigationBar: 
     );
   }
 }
 
-// main periods
+class PeriodsView {
+  final PeriodsModel model;
 
+  PeriodsView(this.model);
 
-class Periodsmain extends StatefulWidget {
-  const Periodsmain({Key? key}) : super(key: key);
-
-  @override
-  _PeriodsmainState createState() => _PeriodsmainState();
-}
-
-class _PeriodsmainState extends State<Periodsmain> {
-  DateTime today = DateTime.now();
-  DateTime firstDayOfWeek = DateTime.now();
-  DateTime lastDayOfWeek = DateTime.now().add(Duration(days: 6));
-  String currentUsername = '';
-
-  @override
-  void initState() {
-    super.initState();
-    // Initialize currentUsername with the user's display name
-    fetchCurrentUsername();
-  }
-
-  Future<void> fetchCurrentUsername() async {
-    final user = FirebaseAuth.instance.currentUser;
-    if (user != null) {
-      setState(() {
-        currentUsername = user.displayName ?? ''; // Display name or an empty string if not available
-      });
-    }
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
-    
       body: SafeArea(
         child: SingleChildScrollView(
           child: Container(
-            color:Color.fromARGB(97, 209, 190, 213) ,
+             color:Color.fromARGB(97, 209, 190, 213) ,
 
             child: Column(
           
@@ -338,11 +275,10 @@ class _PeriodsmainState extends State<Periodsmain> {
               ],
             ),
           ),
-          
+            
+          ),
         ),
       ),
-      bottomNavigationBar: BottomNavBarFb3(),
     );
-    
   }
 }
