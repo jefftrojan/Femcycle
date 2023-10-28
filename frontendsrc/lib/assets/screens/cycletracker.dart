@@ -298,11 +298,11 @@ class _PeriodsmainState extends State<Periodsmain> {
                   ),
 
                 ),),
-                SizedBox(height: 30,),
+                SizedBox(height: 50,),
                 Padding(
                   padding: const EdgeInsets.all(0.0),
                   child: ClipRRect(
-                    borderRadius: BorderRadius.only(
+                    borderRadius: const BorderRadius.only(
                       topLeft: Radius.circular(30.0),
                       topRight: Radius.circular(30.0),
                     ),
@@ -312,9 +312,9 @@ class _PeriodsmainState extends State<Periodsmain> {
                       child: Center(
                         child: Column(
                           children: [
-                            SizedBox(height: 10,),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
+                            SizedBox(height: 20,),
+                            const Padding(
+                              padding: EdgeInsets.all(8.0),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
