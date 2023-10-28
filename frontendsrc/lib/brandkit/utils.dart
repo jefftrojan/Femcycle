@@ -37,7 +37,7 @@ class TopBarFb2 extends StatelessWidget {
               padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
               child: Align(
                 child: Text(
-                  'Jared $currentUsername', // Display the custom username here
+                  '$currentUsername', // Display the custom username here
                   style: const TextStyle(
                       color: Colors.black,
                       fontSize: 20,
@@ -84,12 +84,12 @@ class BottomNavBarFb3 extends StatelessWidget {
                   onPressed: () {}),
               Spacer(),
               IconBottomBar(
-                  text: "Search",
+                  text: "Chat",
                   icon: Icons.search_outlined,
                   selected: false,
                   onPressed: () {}),
               IconBottomBar(
-                  text: "Cart",
+                  text: "",
                   icon: Icons.local_grocery_store_outlined,
                   selected: false,
                   onPressed: () {}),
@@ -216,7 +216,7 @@ class _HorizontalTilesState extends State<HorizontalTiles> {
       },
       child: Center(
         child: Container(
-          width: 100, // Set the desired width
+          width: 120, // Set the desired width
           height: 100, // Set the desired height
           margin: EdgeInsets.all(8),
           padding: EdgeInsets.all(8),

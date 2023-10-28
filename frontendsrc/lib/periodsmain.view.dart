@@ -174,8 +174,9 @@ class CycleTrackView {
 
 class PeriodsView extends StatefulWidget {
   final PeriodsModel model;
+  PeriodsView(this.model); 
 
-  PeriodsView(this.model);
+  // PeriodsView(this.model, {required PeriodsModel othermodel});
 
   @override
   _PeriodsViewState createState() => _PeriodsViewState();
@@ -244,7 +245,7 @@ class _PeriodsViewState extends State<PeriodsView> {
                     width: 350,
                     child: Column(
                       children: [
-                        Center(child: Text("Your period is likely to start on or around September 10th"))
+                        Center(child: Text("Your period is likely to start on or around November 26th"))
                       ],
                     ),
                   ),
@@ -276,7 +277,7 @@ class _PeriodsViewState extends State<PeriodsView> {
                                 ],
                               ),
                             ),
-                            SizedBox(height: 30,),
+                            // SizedBox(height: 30,),
                             Center(child: HorizontalTiles())
                           ],
                         ),

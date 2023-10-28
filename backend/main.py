@@ -1,48 +1,66 @@
-import pickle
+from fastapi import FastAPI
+from pydantic import BaseModel
 import pandas as pd
-from flask import Flask, render_template, request, jsonify
+import statsmodels.api as sm
+from datetime import date, timedelta
+from sklearn.metrics import mean_absolute_error
 
-# Load the SVR model
-with open('svr_model.pkl', 'rb') as model_file:
-    model = pickle.load(model_file)
+app = FastAPI()
+from fastapi.middleware.cors import CORSMiddleware
 
-app = Flask(__name__)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
-@app.route('/')
-def index():
-    # Render the HTML template
-    return render_template('predict_periods.html')
+class ARIMAModel:
+    def __init__(self, order=(1, 1, 1)):
+        self.order = order
 
-@app.route('/predict', methods=['POST'])
-def predict():
-    try:
-        # Get data from the JSON request
-        data = request.get_json()
+    def fit(self, ts):
+        self.model = sm.tsa.ARIMA(ts, order=self.order)
+        self.results = self.model.fit()
 
-        # Check if the 'Dates' key exists in the JSON data
-        if 'Dates' in data:
-            dates = data['Dates']
-        else:
-            return jsonify({'error': 'Missing "Dates" in the request data'}), 400
+    def predict(self, forecast_steps):
+        forecast = self.results.forecast(steps=forecast_steps)
+        return forecast
 
-        # Ensure that 'Dates' is a list (you may need to adapt this part depending on your input)
-        if not isinstance(dates, list):
-            return jsonify({'error': 'Dates must be a list'}), 400
+# Input model
+class InputModel(BaseModel):
+    ovulation_date: date  # User logs OvulationDay
 
-        # Make predictions using the loaded model
-        predictions = model.predict(pd.DataFrame({'Dates': dates}))
+@app.post("/predict")
+def predict_menstrual_cycle_dates(input_data: InputModel):
+    # Load data from a CSV file
+    data = pd.read_csv('your_data.csv')  # Replace 'your_data.csv' with the actual CSV file path
 
-        # Convert numeric predictions to date format
-        formatted_predictions = [pd.to_datetime('2023-01-01') + pd.DateOffset(days=int(prediction)) for prediction in predictions]
+    # Assuming your CSV file columns are named as 'LoggedDate', 'CycleLength', 'OvulationDay', 'PeriodDate'
+    # You can select the 'PeriodDate' and 'OvulationDay' columns
+    data = data[['OvulationDay', 'PeriodDate']]
 
-        # Return the formatted predictions as a list of date strings
-        formatted_predictions_str = [prediction.strftime('%Y-%m-%d') for prediction in formatted_predictions]
+    # Sort the data by 'OvulationDay' in ascending order
+    data = data.sort_values(by='OvulationDay', ascending=True)
 
-        # Return the predictions as JSON
-        return jsonify({'predictions': formatted_predictions_str}), 200
+    # Convert 'OvulationDay' and 'PeriodDate' to datetime
+    data['OvulationDay'] = pd.to_datetime(data['OvulationDay'])
+    data['PeriodDate'] = pd.to_datetime(data['PeriodDate'])
 
-    except Exception as e:
-        return jsonify({'error': str(e)}), 500
+    # Find the nearest 'OvulationDay' to the user's input
+    user_ovulation_date = input_data.ovulation_date
+    nearest_ovulation_date = data['OvulationDay'].sub(user_ovulation_date).abs().idxmin()
 
-if __name__ == '__main__':
-    app.run(debug=True)
+    # Calculate the 'PeriodDate' based on the nearest 'OvulationDay'
+    period_date = data.loc[nearest_ovulation_date, 'PeriodDate'] + timedelta(days=14)
+
+    # Format the predicted 'PeriodDate'
+    formatted_period_date = period_date.strftime("%d-%m-%Y")
+
+    # Calculate the MAE
+    actual_period_date = period_date  # You need to define the actual period date based on your dataset
+    mae = mean_absolute_error([actual_period_date], [period_date])
+    print(mae)
+
+    return {"predicted_period_date": formatted_period_date, "mae": mae}

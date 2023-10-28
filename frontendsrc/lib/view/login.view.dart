@@ -1,20 +1,57 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:frontendsrc/brandkit/colors.dart';
+import 'package:frontendsrc/model/cycletrack.model.dart';
+import 'package:get/get.dart';
 // import 'package:frontendsrc/controllers/login.control.dart';
 
 import '../model/login_register.model.dart';
+import '../periodsmain.view.dart';
+
 class LoginView extends StatelessWidget {
   final LoginRegisterModel model;
   final Function(String? email, String? password)? onSubmitted;
 
-  LoginView({required this.model, this.onSubmitted});
 
-  void submit() {
+  
+
+  LoginView({required this.model, this.onSubmitted});
+   final PeriodsModel periodsModel = PeriodsModel(
+    currentUsername: "YourUsername",
+    today: DateTime.now(), // Replace with your date
+    firstDayOfWeek: DateTime.now(), // Replace with your date
+    lastDayOfWeek: DateTime.now(), // Replace with your date
+  );
+
+
+  
+  Future<bool> submit() async {
     // Implement your submit logic here.
+    User? user = FirebaseAuth.instance.currentUser;
+    String currentUsername = user != null ? user.displayName ?? 'Guest' : 'Guest';
+
     if (onSubmitted != null) {
-      onSubmitted!(model.email, model.password);
+      // Call the onSubmitted function and wait for its result (assuming it returns a boolean).
+      final loginSuccessful = await onSubmitted!(model.email, model.password);
+      return loginSuccessful;
     }
+    return false;
   }
+
+    void handleLoginButtonTap() async {
+      bool loginSuccessful = await submit();
+
+      if (loginSuccessful) {
+
+        User? user = FirebaseAuth.instance.currentUser;
+        String currentUsername = user != null ? user.displayName ?? 'Guest' : 'Guest';
+
+        Get.off(PeriodsView(periodsModel));
+      }
+    }
+
+  
+
 
   @override
   Widget build(BuildContext context) {
@@ -103,7 +140,8 @@ class LoginView extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (_) => RegisterView(model: model, onSubmitted: onSubmitted),
+                    builder: (_) =>
+                        RegisterView(model: model, onSubmitted: onSubmitted),
                   ),
                 );
               },
@@ -149,10 +187,10 @@ class RegisterView extends StatelessWidget {
 
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
+        padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
         child: ListView(
           children: [
-            SizedBox(height: screenHeight * .12),
+            // SizedBox(height: screenHeight * .12),
             const Text(
               'Create Account,',
               style: TextStyle(
@@ -199,7 +237,8 @@ class RegisterView extends StatelessWidget {
               },
               onSubmitted: (value) => submit(),
               labelText: 'Confirm Password',
-              errorText: model.passwordError, // Use the same error text as the password
+              errorText: model
+                  .passwordError, // Use the same error text as the password
               obscureText: true,
               textInputAction: TextInputAction.done,
             ),
@@ -208,15 +247,20 @@ class RegisterView extends StatelessWidget {
             ),
             FormButton(
               text: 'Sign Up',
-              onPressed: submit,
+              onPressed: () {
+                // On successful registration, store user data and redirect to the login screen.
+                // Implement your logic here to store user data.
+                // For now, let's navigate back to the login screen.
+                Get.off(LoginView(model: LoginRegisterModel()));
+              },
             ),
             SizedBox(
-              height: screenHeight * .125,
+              height: screenHeight * .05,
             ),
             TextButton(
               onPressed: () {
                 // Handle navigation back to the login screen here.
-                Navigator.pop(context);
+                Get.off(LoginView(model: LoginRegisterModel()));
               },
               child: RichText(
                 text: const TextSpan(
