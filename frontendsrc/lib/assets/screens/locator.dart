@@ -82,7 +82,7 @@ class MapSampleState extends State<MapSample> {
 
   Future<void> _getDirections(double destinationLatitude, double destinationLongitude) async {
     if (_currentLocation != null) {
-      final String apiKey = "AIzaSyAj38FoUFL1SJD--adxoOlXN6re9zZptec";
+      final String apiKey = "";
       final String origin = '${_currentLocation!.latitude},${_currentLocation!.longitude}';
       final String destination = '$destinationLatitude,$destinationLongitude';
 
