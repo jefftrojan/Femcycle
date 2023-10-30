@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontendsrc/brandkit/textstylealt.dart';
 
 import '../controllers/symptoms.controller.dart';
 import '../model/symptoms.model.dart';
@@ -32,9 +33,10 @@ class _SymptomFormState extends State<SymptomForm> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Text('Title'),
+            Text('Wellness Check', style: TextStyle(fontSize: SubtitleStyle.fontSize),),
             TextField(controller: _titleController),
-            Text('Text'),
+            Flexible(child: Text('We use the data you enter to better your period predictions')),
+            SizedBox(height: 10,),
             TextField(controller: _textController),
             Text('Range Picker'),
             Slider(
@@ -48,7 +50,7 @@ class _SymptomFormState extends State<SymptomForm> {
               max: 5.0,
               divisions: 5,
             ),
-            Text('Horizontal Grid'),
+            Text('Discharge Appearance'),
             GridView.builder(
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 3,

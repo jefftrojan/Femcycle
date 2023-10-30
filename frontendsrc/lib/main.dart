@@ -1,10 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:frontendsrc/assets/screens/chat.dart';
-import 'package:frontendsrc/assets/screens/signin.dart';
+// import 'package:frontendsrc/assets/screens/chat.dart';
+// import 'package:frontendsrc/assets/screens/signin.dart';
 import 'package:frontendsrc/brandkit/colors.dart';
 import 'package:frontendsrc/firebase_options.dart';
+import 'package:frontendsrc/view/chat.dart';
 import 'package:frontendsrc/view/locator.dart';
 import 'package:frontendsrc/view/symptoms.view.dart';
 import 'package:get/get.dart';
@@ -62,7 +63,7 @@ class MyApp extends StatelessWidget {
       ),
       debugShowCheckedModeBanner: false,
       title: '',
-      home: SymptomForm(),
+      home: PeriodsView(periodsModel),
       // initialRoute: '/',
        routes: {
         '/home': (context) => PeriodsView(periodsModel), // Home main
