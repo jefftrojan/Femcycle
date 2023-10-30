@@ -66,7 +66,7 @@ class _CycleTrackViewState extends State<CycleTrackView>{
                 upperTitle: 'Your Upper Title',
                 currentUsername: currentUsername, 
               ),
-              SizedBox(height: 10,),
+              // SizedBox(height: 10,),
               Container(
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -182,6 +182,7 @@ class _CycleTrackViewState extends State<CycleTrackView>{
           ),
         ),
       ),
+      bottomNavigationBar: BottomNavBarFb3(),
     );
   }
 }

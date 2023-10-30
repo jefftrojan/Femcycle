@@ -7,7 +7,6 @@ import 'package:frontendsrc/model/cycletrack.model.dart';
 import 'package:frontendsrc/periodsmain.view.dart';
 import 'package:get/get.dart';
 
-
 class TopBarFb2 extends StatefulWidget {
   final String title;
   final String upperTitle;
@@ -71,13 +70,10 @@ class _TopBarFb2State extends State<TopBarFb2> {
             ),
           ],
         ),
-  
       ],
     );
   }
 }
-
-
 
 // bottomnav
 
@@ -99,7 +95,6 @@ class BottomNavBarFb3 extends StatelessWidget {
         width: MediaQuery.of(context).size.width,
         child: Padding(
           padding: const EdgeInsets.only(left: 25.0, right: 25.0),
-          
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -107,7 +102,9 @@ class BottomNavBarFb3 extends StatelessWidget {
                   text: "Home",
                   icon: Icons.home,
                   selected: true,
-                  onPressed: () {}),
+                  onPressed: () {
+                     Navigator.pushNamed(context, '/home');
+                  }),
               Spacer(),
               IconBottomBar(
                   text: "Chat",
@@ -121,25 +118,15 @@ class BottomNavBarFb3 extends StatelessWidget {
                   icon: Icons.date_range_outlined,
                   selected: false,
                   onPressed: () {
-                    //   Navigator.push(
-                    // context,
-                    // MaterialPageRoute(
-                    //   builder: (context) {
-                    //     // Create an instance of CycleTrackModel (if not created already)
-                    //     // CycleTrackModel cycleTrackModel = CycleTrackModel(currentUsername: '', today: DateTime.now()); // Replace with actual model creation
-                    //     // return CycleTrackView();
-                    //   },
-                    // ),
-                 
-
-
+                    Navigator.pushNamed(context, '/tracker');
+                  
                   }),
               IconBottomBar(
                   text: "Locator",
                   icon: Icons.location_pin,
                   selected: false,
                   onPressed: () {
-                    // Get.off()
+                    Navigator.pushNamed(context, '/locator');
                   })
             ],
           ),
@@ -222,10 +209,22 @@ class _HorizontalTilesState extends State<HorizontalTiles> {
 
   // Define the tile data with their icons
   final List<Map<String, dynamic>> tiles = [
-    {'icon': Icons.home, 'text': 'Home', 'route':"/home"},
-    {'icon': Icons.date_range_outlined, 'text': 'Log Periods', 'route':'/tracker'},
-    {'icon': Icons.list_alt_outlined, 'text': 'Hospitals Nearby', 'route':'/home'},
-    {'icon': Icons.chat_bubble_outline_outlined, 'text': 'Access Chat', 'route':'/chat'},
+    {'icon': Icons.home, 'text': 'Home', 'route': "/home"},
+    {
+      'icon': Icons.date_range_outlined,
+      'text': 'Log Periods',
+      'route': '/tracker'
+    },
+    {
+      'icon': Icons.list_alt_outlined,
+      'text': 'Hospitals Nearby',
+      'route': '/home'
+    },
+    {
+      'icon': Icons.chat_bubble_outline_outlined,
+      'text': 'Access Chat',
+      'route': '/chat'
+    },
   ];
 
   @override
@@ -256,14 +255,14 @@ class _HorizontalTilesState extends State<HorizontalTiles> {
         setState(() {
           activeTile = index;
           Navigator.pushNamed(context, tiles[index]['route']);
-
         });
       },
       child: Container(
         width: 140, // Set the desired width
         height: 120, // Set the desired height
         margin: const EdgeInsets.all(8), // Set equal horizontal margin
-        padding: const EdgeInsets.symmetric(horizontal: 8), // Set equal horizontal padding
+        padding: const EdgeInsets.symmetric(
+            horizontal: 8), // Set equal horizontal padding
         decoration: BoxDecoration(
           color: isActive ? primary : Colors.grey,
           borderRadius: BorderRadius.circular(8),

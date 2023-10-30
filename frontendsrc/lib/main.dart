@@ -5,6 +5,8 @@ import 'package:frontendsrc/assets/screens/chat.dart';
 import 'package:frontendsrc/assets/screens/signin.dart';
 import 'package:frontendsrc/brandkit/colors.dart';
 import 'package:frontendsrc/firebase_options.dart';
+import 'package:frontendsrc/view/locator.dart';
+import 'package:frontendsrc/view/symptoms.view.dart';
 import 'package:get/get.dart';
 import 'controllers/cycletrack.controller.dart';
 import 'periodsmain.view.dart';
@@ -60,13 +62,16 @@ class MyApp extends StatelessWidget {
       ),
       debugShowCheckedModeBanner: false,
       title: '',
-      home: PeriodsView(periodsModel),
+      home: Locator(),
       // initialRoute: '/',
        routes: {
         '/home': (context) => PeriodsView(periodsModel), // Home main
         '/tracker': (context) => CycleTrackView( cycleTrackModel,CycleTrackModel: CycleTrackModel), //cycletracking
         '/chat': (context) => ChatScreen(),//chatscreen
-        // '/': (context) => DetailsScreen(), // Details screen
+        '/symptoms': (context) => SymptomForm(),//log symptom
+        '/locator':(context) => Locator() //locate hospitals
+
+
       },
     );
   }
