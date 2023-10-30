@@ -62,7 +62,7 @@ class MyApp extends StatelessWidget {
       ),
       debugShowCheckedModeBanner: false,
       title: '',
-      home: Locator(),
+      home: SymptomForm(),
       // initialRoute: '/',
        routes: {
         '/home': (context) => PeriodsView(periodsModel), // Home main
