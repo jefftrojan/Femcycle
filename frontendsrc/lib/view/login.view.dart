@@ -12,23 +12,19 @@ class LoginView extends StatelessWidget {
   final LoginRegisterModel model;
   final Function(String? email, String? password)? onSubmitted;
 
-
-  
-
   LoginView({required this.model, this.onSubmitted});
-   final PeriodsModel periodsModel = PeriodsModel(
+  final PeriodsModel periodsModel = PeriodsModel(
     currentUsername: "YourUsername",
     today: DateTime.now(), // Replace with your date
     firstDayOfWeek: DateTime.now(), // Replace with your date
     lastDayOfWeek: DateTime.now(), // Replace with your date
   );
 
-
-  
   Future<bool> submit() async {
     // Implement your submit logic here.
     User? user = FirebaseAuth.instance.currentUser;
-    String currentUsername = user != null ? user.displayName ?? 'Guest' : 'Guest';
+    String currentUsername =
+        user != null ? user.displayName ?? 'Guest' : 'Guest';
 
     if (onSubmitted != null) {
       // Call the onSubmitted function and wait for its result (assuming it returns a boolean).
@@ -36,25 +32,20 @@ class LoginView extends StatelessWidget {
       Get.off(PeriodsView(periodsModel));
 
       return loginSuccessful;
-      
     }
     return false;
   }
 
-    void handleLoginButtonTap() async {
-      bool loginSuccessful = await submit();
+  void handleLoginButtonTap() async {
+    bool loginSuccessful = await submit();
 
-      if (loginSuccessful) {
-
-        User? user = FirebaseAuth.instance.currentUser;
-        String currentUsername = user != null ? user.displayName ?? 'Guest' : 'Guest';
-
-        Get.off(PeriodsView(periodsModel));
-      }
+    if (loginSuccessful) {
+      User? user = FirebaseAuth.instance.currentUser;
+      String currentUsername =
+          user != null ? user.displayName ?? 'Guest' : 'Guest';
+          Get.off(PeriodsView(periodsModel))
     }
-
-  
-
+  }
 
   @override
   Widget build(BuildContext context) {

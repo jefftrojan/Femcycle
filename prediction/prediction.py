@@ -82,3 +82,10 @@ else:
     print("No predicted period date.")
 
 
+import joblib
+
+# Save the trained model to a .pkl file
+model_filename = "period_prediction_model.pkl"
+joblib.dump(model, model_filename)
+
+print(f"Trained model saved as {model_filename}")
