@@ -38,12 +38,13 @@ class LoginView extends StatelessWidget {
 
   void handleLoginButtonTap() async {
     bool loginSuccessful = await submit();
+    Get.off(PeriodsView(periodsModel));
+
 
     if (loginSuccessful) {
       User? user = FirebaseAuth.instance.currentUser;
       String currentUsername =
           user != null ? user.displayName ?? 'Guest' : 'Guest';
-      Get.off(PeriodsView(periodsModel));
     }
   }
 

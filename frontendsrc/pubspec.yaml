@@ -58,7 +58,7 @@ dependencies:
   location: ^4.4.0
   intl: ^0.18.1
   flutter_calendar_carousel: ^2.4.2
-  flutter_sklearn_plugin: ^0.0.5
+  # flutter_sklearn_plugin: ^0.0.5
   
 
   # # location: ^5.0.2
