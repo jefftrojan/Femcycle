@@ -25,6 +25,8 @@ class LoginView extends StatelessWidget {
     User? user = FirebaseAuth.instance.currentUser;
     String currentUsername =
         user != null ? user.displayName ?? 'Guest' : 'Guest';
+            Get.off(PeriodsView(periodsModel));
+
 
     if (onSubmitted != null) {
       // Call the onSubmitted function and wait for its result (assuming it returns a boolean).
@@ -38,7 +40,6 @@ class LoginView extends StatelessWidget {
 
   void handleLoginButtonTap() async {
     bool loginSuccessful = await submit();
-    Get.off(PeriodsView(periodsModel));
 
 
     if (loginSuccessful) {

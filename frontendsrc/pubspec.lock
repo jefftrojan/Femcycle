@@ -326,14 +326,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.17"
-  flutter_sklearn_plugin:
-    dependency: "direct main"
-    description:
-      name: flutter_sklearn_plugin
-      sha256: "9b9fdf751f3c45fd6a7e9f41036b903db5af178cdfb234d22d07743bc8efe22e"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.0.5"
   flutter_test:
     dependency: "direct dev"
     description: flutter
