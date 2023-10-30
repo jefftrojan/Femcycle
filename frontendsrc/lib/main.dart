@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:frontendsrc/assets/screens/chat.dart';
 import 'package:frontendsrc/assets/screens/signin.dart';
 import 'package:frontendsrc/brandkit/colors.dart';
 import 'package:frontendsrc/firebase_options.dart';
@@ -44,7 +45,7 @@ class MyApp extends StatelessWidget {
     // Create an instance of CycleTrackController and provide the model
     CycleTrackController cycleTrackController = CycleTrackController(
       model: cycleTrackModel,
-      view: CycleTrackView(cycleTrackModel),
+      view: CycleTrackView(cycleTrackModel, CycleTrackModel:CycleTrackModel ),
     );
 
     // Create an instance of PeriodsController and provide the model
@@ -60,6 +61,13 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: '',
       home: PeriodsView(periodsModel),
+      // initialRoute: '/',
+       routes: {
+        '/home': (context) => PeriodsView(periodsModel), // Home main
+        '/tracker': (context) => CycleTrackView( cycleTrackModel,CycleTrackModel: CycleTrackModel), //cycletracking
+        '/chat': (context) => ChatScreen(),//chatscreen
+        // '/': (context) => DetailsScreen(), // Details screen
+      },
     );
   }
 }

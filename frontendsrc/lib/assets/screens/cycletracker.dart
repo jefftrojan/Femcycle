@@ -254,7 +254,7 @@ class _PeriodsmainState extends State<Periodsmain> {
                 TopBarFb2(
                     title: 'Welcome back',
                     upperTitle: 'Your Upper Title',
-                    currentUsername: currentUsername, // Pass the current username
+                    currentUsername: currentUsername,  // Pass the current username
                   ),
                   SizedBox(height: 15,),
                   

@@ -155,7 +155,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                   Navigator.of(context).push(
                                   MaterialPageRoute(
                                     builder: (context) {
-                                     return LoginView(model: LoginRegisterModel()); // Replace SignUpScreen with your actual signup screen.
+                                     return LoginView(model: LoginRegisterModel()); 
                                     },
                                   ),
                                 );

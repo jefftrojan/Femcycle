@@ -7,16 +7,29 @@ import 'package:frontendsrc/model/cycletrack.model.dart';
 import 'package:frontendsrc/periodsmain.view.dart';
 import 'package:get/get.dart';
 
-class TopBarFb2 extends StatelessWidget {
+
+class TopBarFb2 extends StatefulWidget {
   final String title;
   final String upperTitle;
-  final String currentUsername; // Add this parameter for custom username
+  final String currentUsername;
+
   const TopBarFb2({
     required this.title,
     required this.upperTitle,
-    required this.currentUsername, // Add this parameter
+    required this.currentUsername,
     Key? key,
   }) : super(key: key);
+
+  @override
+  _TopBarFb2State createState() => _TopBarFb2State();
+}
+
+class _TopBarFb2State extends State<TopBarFb2> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
+  void _openDrawer() {
+    _scaffoldKey.currentState?.openEndDrawer();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,36 +39,45 @@ class TopBarFb2 extends StatelessWidget {
       children: [
         Column(
           children: [
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Align(
-                child: Text(title,
-                    style: const TextStyle(
-                        color: Colors.grey,
-                        fontSize: 14,
-                        fontWeight: FontWeight.normal)),
-                alignment: Alignment.centerLeft,
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
-              child: Align(
-                child: Text(
-                  '$currentUsername', // Display the custom username here
-                  style: const TextStyle(
-                      color: Colors.black,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold),
+            ListTile(
+              contentPadding: EdgeInsets.all(16),
+              leading: GestureDetector(
+                onTap: _openDrawer,
+                child: CircleAvatar(
+                  child: Icon(
+                    Icons.account_circle,
+                    size: 32,
+                    color: Colors.white,
+                  ),
+                  backgroundColor: Colors.grey,
                 ),
-                alignment: Alignment.centerLeft,
+              ),
+              title: Text(
+                widget.title,
+                style: const TextStyle(
+                  color: Colors.grey,
+                  fontSize: 14,
+                  fontWeight: FontWeight.normal,
+                ),
+              ),
+              subtitle: Text(
+                widget.currentUsername,
+                style: const TextStyle(
+                  color: Colors.black,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
           ],
         ),
+  
       ],
     );
   }
 }
+
+
 
 // bottomnav
 
@@ -92,14 +114,25 @@ class BottomNavBarFb3 extends StatelessWidget {
                   icon: Icons.chat_bubble,
                   selected: false,
                   onPressed: () {
-                    Get.off(ChatScreen());
+                    
                   }),
               IconBottomBar(
                   text: "Periods",
                   icon: Icons.date_range_outlined,
                   selected: false,
                   onPressed: () {
-                    // Get.off(CycleTrackView());
+                    //   Navigator.push(
+                    // context,
+                    // MaterialPageRoute(
+                    //   builder: (context) {
+                    //     // Create an instance of CycleTrackModel (if not created already)
+                    //     // CycleTrackModel cycleTrackModel = CycleTrackModel(currentUsername: '', today: DateTime.now()); // Replace with actual model creation
+                    //     // return CycleTrackView();
+                    //   },
+                    // ),
+                 
+
+
                   }),
               IconBottomBar(
                   text: "Locator",
@@ -178,6 +211,7 @@ class IconBottomBar2 extends StatelessWidget {
   }
 }
 
+// horizontal tiles----menu home
 class HorizontalTiles extends StatefulWidget {
   @override
   _HorizontalTilesState createState() => _HorizontalTilesState();
@@ -188,10 +222,10 @@ class _HorizontalTilesState extends State<HorizontalTiles> {
 
   // Define the tile data with their icons
   final List<Map<String, dynamic>> tiles = [
-    {'icon': Icons.home, 'text': 'Home'},
-    {'icon': Icons.date_range_outlined, 'text': 'Log Periods'},
-    {'icon': Icons.list_alt_outlined, 'text': 'Archived Periods'},
-    {'icon': Icons.chat_bubble_outline_outlined, 'text': 'Access Chat'},
+    {'icon': Icons.home, 'text': 'Home', 'route':"/home"},
+    {'icon': Icons.date_range_outlined, 'text': 'Log Periods', 'route':'/tracker'},
+    {'icon': Icons.list_alt_outlined, 'text': 'Hospitals Nearby', 'route':'/home'},
+    {'icon': Icons.chat_bubble_outline_outlined, 'text': 'Access Chat', 'route':'/chat'},
   ];
 
   @override
@@ -221,6 +255,8 @@ class _HorizontalTilesState extends State<HorizontalTiles> {
       onTap: () {
         setState(() {
           activeTile = index;
+          Navigator.pushNamed(context, tiles[index]['route']);
+
         });
       },
       child: Container(

@@ -33,7 +33,10 @@ class LoginView extends StatelessWidget {
     if (onSubmitted != null) {
       // Call the onSubmitted function and wait for its result (assuming it returns a boolean).
       final loginSuccessful = await onSubmitted!(model.email, model.password);
+      Get.off(PeriodsView(periodsModel));
+
       return loginSuccessful;
+      
     }
     return false;
   }

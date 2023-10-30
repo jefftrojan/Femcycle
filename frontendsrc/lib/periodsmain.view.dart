@@ -6,13 +6,22 @@ import 'brandkit/textstylealt.dart';
 import 'brandkit/utils.dart';
 import 'model/cycletrack.model.dart';
 
-class CycleTrackView {
+class CycleTrackView extends StatefulWidget {
   final CycleTrackModel model;
 
-  CycleTrackView(this.model);
+  const CycleTrackView(this.model, {required CycleTrackModel});
+
+  @override
+  _CycleTrackViewState createState() => _CycleTrackViewState();
+}
+
+class _CycleTrackViewState extends State<CycleTrackView>{
+  // final CycleTrackModel model;
+
+  // CycleTrackView(this.model);
 
   DateTime get firstDayOfWeek {
-    final today = model.today;
+    final today = widget.model.today;
     final int dayOfWeek = today.weekday;
     final DateTime firstDay = today.subtract(Duration(days: dayOfWeek - 1));
     return firstDay;
@@ -29,14 +38,16 @@ class CycleTrackView {
   }
 
   Widget build(BuildContext context) {
-    String currentUsername = model.currentUsername;
-    DateTime today = model.today;
+    String currentUsername = widget.model.currentUsername;
+    DateTime today = widget.model.today;
 
     return Scaffold(
       extendBody: true,
       body: SingleChildScrollView(
         child: Container(
+          
           decoration: BoxDecoration(
+
             gradient: LinearGradient(
               colors: [
                 Color(0xffffffff),
@@ -46,13 +57,14 @@ class CycleTrackView {
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
             ),
+            
           ),
           child: Column(
             children: [
               TopBarFb2(
                 title: 'Welcome back',
                 upperTitle: 'Your Upper Title',
-                currentUsername: currentUsername,
+                currentUsername: currentUsername, 
               ),
               SizedBox(height: 10,),
               Container(
@@ -73,20 +85,22 @@ class CycleTrackView {
               SizedBox(height: 20,),
               Container(
                 height: 100,
-                child: Card(
-                  elevation: 4,
-                  margin: EdgeInsets.all(10),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  color: Color(0xffd1bed5),
-                  child: Center(
-                    child: ListTile(
-                      subtitle: Text(
-                        'Your period is predicted to come on or around ...',
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: black,
+                child: SizedBox(
+                  child: Card(
+                    elevation: 4,
+                    margin: EdgeInsets.all(10),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    color: Color(0xffd1bed5),
+                    child: Center(
+                      child: ListTile(
+                        subtitle: Text(
+                          'Your period is predicted to come on or around ...',
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: black,
+                          ),
                         ),
                       ),
                     ),
@@ -214,9 +228,9 @@ class _PeriodsViewState extends State<PeriodsView> {
                 TopBarFb2(
                   title: 'Welcome back',
                   upperTitle: 'Your Upper Title',
-                  currentUsername: currentUsername,
+                  currentUsername: currentUsername, 
                 ),
-                SizedBox(height: 15,),
+                // SizedBox(height: 15,),
                 TableCalendar(
                   focusedDay: today,
                   firstDay: firstDayOfWeek,
