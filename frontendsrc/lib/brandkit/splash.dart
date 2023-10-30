@@ -1,6 +1,6 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:frontendsrc/assets/screens/onboarding.dart';
+import 'package:frontendsrc/view/onboarding.view.dart';
 
 import 'colors.dart';
 
