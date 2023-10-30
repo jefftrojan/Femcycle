@@ -63,13 +63,13 @@ class MyApp extends StatelessWidget {
       ),
       debugShowCheckedModeBanner: false,
       title: '',
-      home: PeriodsView(periodsModel),
+      home: SplashScreenWidget(),
       // initialRoute: '/',
        routes: {
         '/home': (context) => PeriodsView(periodsModel), // Home main
         '/tracker': (context) => CycleTrackView( cycleTrackModel,CycleTrackModel: CycleTrackModel), //cycletracking
         '/chat': (context) => ChatScreen(),//chatscreen
-        '/symptoms': (context) => SymptomForm(),//log symptom
+        // '/symptoms': (context) => SymptomForm(),//log symptom
         '/locator':(context) => Locator() //locate hospitals
 
 
