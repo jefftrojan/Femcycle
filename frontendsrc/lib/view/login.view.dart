@@ -43,7 +43,7 @@ class LoginView extends StatelessWidget {
       User? user = FirebaseAuth.instance.currentUser;
       String currentUsername =
           user != null ? user.displayName ?? 'Guest' : 'Guest';
-          Get.off(PeriodsView(periodsModel))
+      Get.off(PeriodsView(periodsModel));
     }
   }
 
